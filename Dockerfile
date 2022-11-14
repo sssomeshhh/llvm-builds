@@ -22,10 +22,11 @@ RUN tar xvf llvm.tgz
 RUN mkdir llvm
 RUN mv -v llvm-project-llvmorg-$LLVM_TAGV llvm/sd
 RUN mkdir llvm/bd
+RUN mkdir llvm/bd/llvm
 
 # setup variables
-ENV SD=/root/llvm/sd
-ENV BD=/root/llvm/bd
+ENV SD=/root/llvm/sd/llvm
+ENV BD=/root/llvm/bd/llvm
 ENV CC=/usr/bin/clang-14
 ENV CXX=/usr/bin/clang++-14
 ENV CXXFLAGS="-stdlib=libc++"
