@@ -20,7 +20,7 @@ RUN tar xvf llvm.tgz
 
 # setup directories
 RUN mkdir llvm-bd && mkdir llvm-bd/llvm
-RUN mv llvm-project-llvmorg-$LLVM_TAGV llvm-sd -v
+RUN mv llvm-project-llvmorg-$LLVM_TAGV llvm-sd
 
 # setup variables
 ENV SD=/root/llvm-sd/llvm
@@ -35,8 +35,8 @@ RUN cmake \
     -B $BD \
     -G Ninja \
     -DCMAKE_BUILD_TYPE=Release \
-    -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;libc;libclc;lld;lldb;mlir;openmp" \
-    -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind;compiler-rt;libc;openmp"
+    -DLLVM_ENABLE_PROJECTS="clang;lld;lldb" \
+    -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libc"
 WORKDIR $BD
 RUN cmake \
     --build \
