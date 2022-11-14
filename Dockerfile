@@ -1,4 +1,4 @@
-FROM ubuntu:jammy
+FROM ubuntu:jammy as llvm-build
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install curl gzip tar xz zlib
