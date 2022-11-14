@@ -14,22 +14,32 @@ RUN apt-get install -y python3 python3-pip python3-venv
 WORKDIR /root
 
 # download source
-ENV LLVM_TAGV=15.0.3
+ARG LLVM_TAGV
 RUN curl -L -o llvm.tgz https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-$LLVM_TAGV.tar.gz
 RUN tar xvf llvm.tgz
 
-# change directory
-WORKDIR /root/llvm-project-llvmorg-$LLVM_TAGV
+# setup directories
+RUN mkdir llvm
+RUN mv -v llvm-project-llvmorg-$LLVM_TAGV llvm/sd
+RUN mkdir llvm/bd
 
-# build project
-RUN mkdir build && \
-    cd build && \
-    CC=/usr/bin/clang-14 \
-    CXX=/usr/bin/clang++-14 \
-    CXXFLAGS="-stdlib=libc++" \
-    cmake \
-    -DLLVM_ENABLE_PROJECTS=clang \
-    -DCMAKE_BUILD_TYPE=Release \
+# setup variables
+ENV SD=/root/llvm/sd
+ENV BD=/root/llvm/bd
+ENV CC=/usr/bin/clang-14
+ENV CXX=/usr/bin/clang++-14
+ENV CXXFLAGS="-stdlib=libc++"
+
+# build source
+RUN cmake \
+    -S $SD \
+    -B $BD \
     -G Ninja \
-    ../llvm && \
-    cmake --build . -- -j $(nproc)
+    -DCMAKE_BUILD_TYPE=Release \
+    -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;libc;libclc;lld;lldb;mlir;openmp" \
+    -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind;compiler-rt;libc;openmp"
+WORKDIR $BD
+RUN cmake \
+    --build \
+    . \
+    -- -j $(nproc)
