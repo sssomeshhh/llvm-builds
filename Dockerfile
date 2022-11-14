@@ -20,7 +20,7 @@ RUN tar xvf llvm.tgz
 
 # setup directories
 RUN mkdir llvm-bd && mkdir llvm-bd/llvm
-RUN mv llvm-project-llvmorg-$LLVM_TAGV llvm-sd
+RUN mv llvm-project-llvmorg-$LLVM_TAGV llvm-sd -v
 
 # setup variables
 ENV SD=/root/llvm-sd/llvm
