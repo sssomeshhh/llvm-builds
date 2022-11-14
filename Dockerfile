@@ -32,4 +32,4 @@ RUN mkdir build && \
     -DCMAKE_BUILD_TYPE=Release \
     -G Ninja \
     ../llvm && \
-    make -j $(nproc)
+    cmake --build . -- -j $(nproc)
