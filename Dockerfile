@@ -35,9 +35,8 @@ RUN cmake \
     -DLLVM_ENABLE_PROJECTS="clang;lld;lldb" \
     -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libc" \
     -DLLVM_TARGETS_TO_BUILD="X86"
-WORKDIR $BD
 RUN cmake \
     --build \
-    . \
+    $BD \
     -- \
     -j $(nproc)
