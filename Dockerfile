@@ -1,32 +1,28 @@
 FROM ubuntu:jammy as llvm-build
 
-# update image
-RUN apt-get update
-RUN apt-get upgrade -y
-
 # install dependencies
-RUN apt-get install -y curl gzip tar xz-utils zlib1g-dev
-RUN apt-get install -y ccache clang-14 cmake make ninja-build
-RUN apt-get install -y libc++-dev libc++abi-dev
-RUN apt-get install -y python3 python3-pip python3-venv
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y curl git nano && \
+    apt-get install -y ccache clang-14 cmake make ninja-build && \
+    apt-get install -y libc++-dev libc++abi-dev && \
+    apt-get install -y gzip tar xz-utils zlib1g-dev && \
+    apt-get install -y python3 python3-pip python3-venv
 
-# change directory
-WORKDIR /root
-
-# download source
+# setup source
 ARG LLVM_TAGV
-RUN curl -L -o llvm.tgz https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-$LLVM_TAGV.tar.gz
-RUN tar xvf llvm.tgz
-
-# setup directories
-RUN mkdir llvm-bd && mkdir llvm-bd/llvm
-RUN mv llvm-project-llvmorg-$LLVM_TAGV llvm-sd
+WORKDIR /root
+RUN mkdir llvm && \
+    cd llvm && \
+    mkdir bd && \
+    mkdir bd/llvm && \
+    git clone https://github.com/llvm/llvm-project.git sd && \
+    cd sd && \
+    git checkout llvmorg-$LLVM_TAGV
 
 # setup variables
-ENV SD=/root/llvm-sd/llvm
-ENV BD=/root/llvm-bd/llvm
-ENV CC=/usr/bin/clang-14
-ENV CXX=/usr/bin/clang++-14
+ENV SD=/root/llvm/sd/llvm BD=/root/llvm/bd/llvm
+ENV CC=/usr/bin/clang-14 CXX=/usr/bin/clang++-14
 ENV CXXFLAGS="-stdlib=libc++"
 
 # build source
@@ -41,4 +37,5 @@ WORKDIR $BD
 RUN cmake \
     --build \
     . \
-    -- -j $(nproc)
+    -- \
+    -j $(nproc)
