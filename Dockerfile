@@ -37,6 +37,7 @@ RUN cmake \
     -DCMAKE_CXX_COMPILER="/usr/bin/clang++-14" \
     -DCMAKE_CXX_FLAGS="-stdlib=libc++" \
     -DCMAKE_INSTALL_PREFIX=$ID \
+    -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-linux-gnu" \
     -DLLVM_ENABLE_PROJECTS="clang;lld;lldb" \
     -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libc" \
     -DLLVM_TARGETS_TO_BUILD="X86"
