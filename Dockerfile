@@ -22,7 +22,6 @@ RUN mkdir llvm && \
 
 # setup variables
 ENV SD=/root/llvm/sd/llvm BD=/root/llvm/bd/llvm
-ENV CC=/usr/bin/clang-14 CXX=/usr/bin/clang++-14
 ENV CXXFLAGS="-stdlib=libc++"
 
 # build source
@@ -31,6 +30,8 @@ RUN cmake \
     -B $BD \
     -G Ninja \
     -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_C_COMPILER="/usr/bin/clang-14" \
+    -DCMAKE_CXX_COMPILER="/usr/bin/clang++-14" \
     -DLLVM_ENABLE_PROJECTS="clang;lld;lldb" \
     -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libc" \
     -DLLVM_TARGETS_TO_BUILD="X86" \
