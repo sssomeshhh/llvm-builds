@@ -20,3 +20,16 @@ RUN tar xvf llvm.tgz
 
 # change directory
 WORKDIR /root/llvm-project-llvmorg-$LLVM_TAGV
+
+# build project
+RUN mkdir build && \
+    cd build && \
+    CC=/usr/bin/clang-14 \
+    CXX=/usr/bin/clang++-14 \
+    CXXFLAGS="-stdlib=libc++" \
+    cmake \
+    -DLLVM_ENABLE_PROJECTS=clang \
+    -DCMAKE_BUILD_TYPE=Release \
+    -G Ninja \
+    ../llvm && \
+    make -j $(nproc)
