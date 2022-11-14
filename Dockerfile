@@ -21,3 +21,30 @@ RUN mkdir llvm && \
     git clone https://github.com/llvm/llvm-project.git sd && \
     cd sd && \
     git checkout llvmorg-$LLVM_TAGV
+
+# setup variables
+ARG BD=/root/llvm/bd/llvm
+ARG ID=/root/llvm/id/llvm
+ENV SD=/root/llvm/sd/llvm
+
+# build source
+RUN cmake \
+    -S $SD \
+    -B $BD \
+    -G Ninja \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_C_COMPILER="/usr/bin/clang-14" \
+    -DCMAKE_CXX_COMPILER="/usr/bin/clang++-14" \
+    -DCMAKE_CXX_FLAGS="-stdlib=libc++" \
+    -DCMAKE_INSTALL_PREFIX=$ID \
+    -DLLVM_ENABLE_PROJECTS="clang;lld;lldb" \
+    -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libc" \
+    -DLLVM_TARGETS_TO_BUILD="X86"
+RUN cmake \
+    --build \
+    $BD \
+    -- \
+    -j $(nproc)
+RUN cmake \
+    --install \
+    $BD
