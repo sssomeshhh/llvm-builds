@@ -20,7 +20,7 @@ RUN tar xvf llvm.tgz
 
 # setup directories
 RUN mkdir llvm && mkdir llvm/bd && mkdir llvm/bd/llvm
-RUN ln -s -n -v llvm-project-llvmorg-$LLVM_TAGV llvm/sd
+RUN mv llvm-project-llvmorg-$LLVM_TAGV llvm/sd
 
 # ls files
 RUN ls -lsha .
