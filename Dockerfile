@@ -22,6 +22,13 @@ RUN tar xvf llvm.tgz
 RUN mkdir llvm && mkdir llvm/bd && mkdir llvm/bd/llvm
 RUN ln -s -n -v llvm-project-llvmorg-$LLVM_TAGV llvm/sd
 
+# ls files
+RUN ls -lsha .
+RUN ls -lsha llvm-project-llvmorg-$LLVM_TAGV
+RUN ls -lsha llvm
+RUN ls -lsha llvm/bd
+RUN ls -lsha llvm/sd
+
 # setup variables
 ENV SD=/root/llvm/sd/llvm
 ENV BD=/root/llvm/bd/llvm
