@@ -19,10 +19,8 @@ RUN curl -L -o llvm.tgz https://github.com/llvm/llvm-project/archive/refs/tags/l
 RUN tar xvf llvm.tgz
 
 # setup directories
-RUN mkdir llvm
-RUN mv -v llvm-project-llvmorg-$LLVM_TAGV llvm/sd
-RUN mkdir llvm/bd
-RUN mkdir llvm/bd/llvm
+RUN mkdir llvm && mkdir llvm/bd && mkdir llvm/bd/llvm
+RUN ln -s -n -v llvm-project-llvmorg-$LLVM_TAGV llvm/sd
 
 # setup variables
 ENV SD=/root/llvm/sd/llvm
