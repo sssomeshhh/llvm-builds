@@ -43,3 +43,17 @@ RUN cmake \
     -DLLVM_TARGETS_TO_BUILD="all"
 RUN cmake --build $BD
 RUN cmake --install $BD
+
+# package artifacts
+RUN tar -cvf bd.tar $BD && \
+    ls -sh bd.tar && \
+    xz -zve bd.tar && \
+    ls -sh bd.tar.xz
+RUN tar -cvf id.tar $ID && \
+    ls -sh id.tar && \
+    xz -zve id.tar && \
+    ls -sh id.tar.xz
+RUN tar -cvf sd.tar $SD && \
+    ls -sh sd.tar && \
+    xz -zve sd.tar && \
+    ls -sh sd.tar.xz
