@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-      - name: Login to GHCR
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v2.1.0
         with:
           registry: ghcr.io
@@ -17,33 +17,15 @@ jobs:
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
 
-      - name: Cache Docker Layers
-        id: cache_docker_layers
-        uses: actions/cache@v3.0.11
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-lb-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-buildx-lb-
-
       - name: Build Docker Image
         id: docker_build_push
         uses: docker/build-push-action@v3.2.0
         with:
           builder: ${{ steps.setup_buildx.name }}
           target: llvm-build
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
           push: true
           tags: |
             ghcr.io/sssomeshhh/llvm-builds:test-${{ github.sha }}
             ghcr.io/sssomeshhh/llvm-builds:test-${{ github.ref_name }}
           build-args: |
             LLVM_TAGV=15.0.3
-
-      - name: Docker Image Digest
-        run: echo ${{ steps.docker_build_push.outputs.digest }}
-
-      - name: Move Docker Layer Cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
