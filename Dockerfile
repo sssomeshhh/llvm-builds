@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get install -y curl git nano && \
     apt-get install -y ccache clang-14 cmake make ninja-build && \
     apt-get install -y libc++-dev libc++abi-dev && \
-    apt-get install -y gzip tar xz-utils zlib1g-dev && \
+    apt-get install -y gzip lz4 tar xz-utils zlib1g-dev && \
     apt-get install -y python3 python3-pip python3-venv
 
 # setup source
@@ -25,9 +25,9 @@ RUN mkdir llvm && \
 # setup variables
 ARG BD=/root/llvm/bd/llvm
 ARG ID=/root/llvm/id/llvm
-ENV SD=/root/llvm/sd/llvm
+ARG SD=/root/llvm/sd/llvm
 
-# build source
+# build artifacts
 RUN cmake \
     -S $SD \
     -B $BD \
@@ -45,15 +45,21 @@ RUN cmake --build $BD
 RUN cmake --install $BD
 
 # package artifacts
-RUN tar -cvf bd.tar $BD && \
-    ls -sh bd.tar && \
-    xz -zve bd.tar && \
-    ls -sh bd.tar.xz
-RUN tar -cvf id.tar $ID && \
-    ls -sh id.tar && \
-    xz -zve id.tar && \
-    ls -sh id.tar.xz
-RUN tar -cvf sd.tar $SD && \
-    ls -sh sd.tar && \
-    xz -zve sd.tar && \
-    ls -sh sd.tar.xz
+RUN du -sh $BD && \
+    tar -cf bt $BD && \
+    ls -hls bt && \
+    lz4 bt && \
+    ls -hls bt.lz4 && \
+    rm -rf bt
+RUN du -sh $ID && \
+    tar -cf it $ID && \
+    ls -hls it && \
+    lz4 it && \
+    ls -hls it.lz4 && \
+    rm -rf it
+RUN du -sh $SD && \
+    tar -cf st $SD && \
+    ls -hls st && \
+    lz4 st && \
+    ls -hls st.lz4 && \
+    rm -rf st
