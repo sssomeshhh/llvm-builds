@@ -38,7 +38,6 @@ RUN cmake \
     -DCMAKE_CXX_FLAGS="-stdlib=libc++" \
     -DCMAKE_INSTALL_PREFIX=$ID \
     -DLLVM_ENABLE_PROJECTS="all" \
-    -DLLVM_ENABLE_RUNTIMES="all" \
     -DLLVM_INSTALL_UTILS=ON \
     -DLLVM_PARALLEL_COMPILE_JOBS=$(nproc) \
     -DLLVM_TARGETS_TO_BUILD="all"
