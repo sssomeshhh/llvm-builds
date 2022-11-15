@@ -40,6 +40,7 @@ RUN cmake \
     -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-linux-gnu" \
     -DLLVM_ENABLE_PROJECTS="all" \
     -DLLVM_ENABLE_RUNTIMES="all" \
+    -DLLVM_INSTALL_UTILS=ON \
     -DLLVM_TARGETS_TO_BUILD="all"
 RUN cmake \
     --build \
