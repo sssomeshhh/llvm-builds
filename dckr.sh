@@ -1,7 +1,5 @@
 #! /bin/bash
 
-DOCKER_BUILDKIT=1
-
 docker pull $3;
 docker build . \
     --file=p.Dockerfile \
