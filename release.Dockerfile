@@ -9,4 +9,4 @@ ARG RELEASE_TAG
 ENV LLVM_VERSION=$RELEASE_TAG
 
 # unpack artifacts
-ADD https://github.com/sssomeshhh/llvm-build/releases/download/$RELEASE_TAG/id.tar.xz /usr/
+ADD https://github.com/sssomeshhh/llvm-build/releases/download/$RELEASE_TAG/it.xz /usr/

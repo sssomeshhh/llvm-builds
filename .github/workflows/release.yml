@@ -108,4 +108,4 @@ jobs:
             ghcr.io/sssomeshhh/llvm-builds:rb-${{ github.ref_name }}
           build-args: |
             BASE_IMAGE_RELEASE=ubuntu:jammy
-            RELEASE_TAG=${{ github.ref }}
+            RELEASE_TAG=${{ github.ref_name }}
