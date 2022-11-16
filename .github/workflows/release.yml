@@ -1,4 +1,4 @@
-name: image-package
+name: release
 
 on: [push]
 
@@ -6,11 +6,9 @@ jobs:
   pack-bd:
     runs-on: ubuntu-22.04
     steps:
-
       - name: Checkout Repo
         id: checkout_repo
         uses: actions/checkout@v3
-
       - name: Pack BD
         id: pack_bd
         env:
@@ -24,11 +22,9 @@ jobs:
   pack-id:
     runs-on: ubuntu-22.04
     steps:
-
       - name: Checkout Repo
         id: checkout_repo
         uses: actions/checkout@v3
-
       - name: Pack ID
         id: pack_id
         env:
@@ -42,11 +38,9 @@ jobs:
   pack-sd:
     runs-on: ubuntu-22.04
     steps:
-
       - name: Checkout Repo
         id: checkout_repo
         uses: actions/checkout@v3
-
       - name: Pack SD
         id: pack_sd
         env:
