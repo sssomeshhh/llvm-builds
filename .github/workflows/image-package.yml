@@ -14,7 +14,7 @@ jobs:
       - name: Pack BD
         id: pack_bd
         env:
-          IMG_TAG: some_tag
+          IMG_TAG: ghcr.io/sssomeshhh/llvm-builds:test-8e9436e8385e13335569270492586a43121344f2
         run: |
           ./dckr.sh b /root/llvm $IMG_TAG;
 
@@ -31,7 +31,7 @@ jobs:
       - name: Pack ID
         id: pack_id
         env:
-          IMG_TAG: some_tag
+          IMG_TAG: ghcr.io/sssomeshhh/llvm-builds:test-8e9436e8385e13335569270492586a43121344f2
         run: |
           ./dckr.sh i /root/llvm $IMG_TAG;
 
@@ -48,6 +48,6 @@ jobs:
       - name: Pack SD
         id: pack_sd
         env:
-          IMG_TAG: some_tag
+          IMG_TAG: ghcr.io/sssomeshhh/llvm-builds:test-8e9436e8385e13335569270492586a43121344f2
         run: |
           ./dckr.sh s /root/llvm $IMG_TAG;
