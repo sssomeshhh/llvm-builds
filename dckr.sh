@@ -1,5 +1,6 @@
 #! /bin/bash
 
+export DOCKER_BUILDKIT=1;
 docker pull $3;
 docker build . \
     --tag=pack-$1d:temp \
