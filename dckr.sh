@@ -2,7 +2,7 @@
 
 docker pull $3;
 docker build . \
-    --file=p.Dockerfile \
+    --file=package.Dockerfile \
     --tag=pack-$1d:temp \
     --target=llvm-package \
     --build-arg BASE_IMAGE_PACKAGE=$3 \
