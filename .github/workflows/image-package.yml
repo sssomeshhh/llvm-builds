@@ -16,7 +16,6 @@ jobs:
         env:
           IMG_TAG: ghcr.io/sssomeshhh/llvm-builds:test-8e9436e8385e13335569270492586a43121344f2
         run: |
-          export DOCKER_BUILDKIT=1;
           ./dckr.sh b /root/llvm $IMG_TAG;
 
 
@@ -34,7 +33,6 @@ jobs:
         env:
           IMG_TAG: ghcr.io/sssomeshhh/llvm-builds:test-8e9436e8385e13335569270492586a43121344f2
         run: |
-          export DOCKER_BUILDKIT=1;
           ./dckr.sh i /root/llvm $IMG_TAG;
 
 
@@ -52,5 +50,4 @@ jobs:
         env:
           IMG_TAG: ghcr.io/sssomeshhh/llvm-builds:test-8e9436e8385e13335569270492586a43121344f2
         run: |
-          export DOCKER_BUILDKIT=1;
           ./dckr.sh s /root/llvm $IMG_TAG;
