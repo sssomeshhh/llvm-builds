@@ -1,0 +1,37 @@
+name: mk-rl
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Copy Artifacts
+        id: copy_artifacts
+        run: |
+          docker run -dit --rm --name=cntnr ghcr.io/sssomeshhh/llvm-builds:test-xz-l9 bash
+          docker cp cntnr:/root/bd.tar.xz ./
+          ls -hls bd.tar.xz
+          docker cp cntnr:/root/id.tar.xz ./
+          ls -hls id.tar.xz
+          docker cp cntnr:/root/sd.tar.xz ./
+          ls -hls sd.tar.xz
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.sha }}
+          draft: false
+          prerelease: false
+
+      - name: Release Artifacts
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            bd.tar.xz
+            id.tar.xz
+            sd.tar.xz
