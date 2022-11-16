@@ -1,8 +1,23 @@
 name: release
 
-on: [push]
+on:
+  push: [tags]
 
 jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create
+        id: create
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
   pack-bd:
     runs-on: ubuntu-22.04
     steps:
@@ -16,8 +31,12 @@ jobs:
         run: |
           export DOCKER_BUILDKIT=1;
           ./dckr.sh b /root/llvm $IMG_TAG;
-
-
+      - name: Upload
+        id: upload
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            bt.xz
 
   pack-id:
     runs-on: ubuntu-22.04
@@ -32,8 +51,12 @@ jobs:
         run: |
           export DOCKER_BUILDKIT=1;
           ./dckr.sh i /root/llvm $IMG_TAG;
-
-
+      - name: Upload
+        id: upload
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            it.xz
 
   pack-sd:
     runs-on: ubuntu-22.04
@@ -48,3 +71,9 @@ jobs:
         run: |
           export DOCKER_BUILDKIT=1;
           ./dckr.sh s /root/llvm $IMG_TAG;
+      - name: Upload
+        id: upload
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            st.xz
