@@ -4,7 +4,7 @@ FROM ubuntu:jammy as llvm-build
 ENV DEBIAN_FRONTEND='noninteractive'
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y curl git nano && \
+    apt-get install -y binutils curl git nano && \
     apt-get install -y ccache clang-14 cmake make ninja-build && \
     apt-get install -y libc++-dev libc++abi-dev && \
     apt-get install -y gzip lz4 tar xz-utils zlib1g-dev && \
