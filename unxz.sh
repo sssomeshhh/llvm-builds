@@ -8,3 +8,4 @@ ls -hls $1t;
 tar -xf $1t;
 rm -rf $1t;
 du -sh $1d;
+rm -rf $1d/.git;

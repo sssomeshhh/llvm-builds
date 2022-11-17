@@ -1,6 +1,7 @@
 #! /bin/bash
 
 cd $2;
+rm -rf $1d/.git;
 du -sh $1d;
 tar -cf $1t $1d;
 rm -rf $1d;
