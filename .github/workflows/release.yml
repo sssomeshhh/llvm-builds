@@ -29,10 +29,10 @@ jobs:
       - name: Pack BD
         id: pack_bd
         env:
-          IMG_TAG: ghcr.io/sssomeshhh/llvm-builds:test-8e9436e8385e13335569270492586a43121344f2
+          BUILD_IMAGE_TAG: ghcr.io/sssomeshhh/llvm-builds:ib-${{ github.sha }}
         run: |
           export DOCKER_BUILDKIT=1;
-          ./dckr.sh b /root/llvm $IMG_TAG;
+          ./dckr.sh b /root/llvm $BUILD_IMAGE_TAG;
       - name: Upload
         id: upload
         uses: softprops/action-gh-release@v1
@@ -49,10 +49,10 @@ jobs:
       - name: Pack ID
         id: pack_id
         env:
-          IMG_TAG: ghcr.io/sssomeshhh/llvm-builds:test-8e9436e8385e13335569270492586a43121344f2
+          BUILD_IMAGE_TAG: ghcr.io/sssomeshhh/llvm-builds:ib-${{ github.sha }}
         run: |
           export DOCKER_BUILDKIT=1;
-          ./dckr.sh i /root/llvm $IMG_TAG;
+          ./dckr.sh i /root/llvm $BUILD_IMAGE_TAG;
       - name: Upload
         id: upload
         uses: softprops/action-gh-release@v1
@@ -69,10 +69,10 @@ jobs:
       - name: Pack SD
         id: pack_sd
         env:
-          IMG_TAG: ghcr.io/sssomeshhh/llvm-builds:test-8e9436e8385e13335569270492586a43121344f2
+          BUILD_IMAGE_TAG: ghcr.io/sssomeshhh/llvm-builds:ib-${{ github.sha }}
         run: |
           export DOCKER_BUILDKIT=1;
-          ./dckr.sh s /root/llvm $IMG_TAG;
+          ./dckr.sh s /root/llvm $BUILD_IMAGE_TAG;
       - name: Upload
         id: upload
         uses: softprops/action-gh-release@v1
@@ -107,7 +107,4 @@ jobs:
             ghcr.io/sssomeshhh/llvm-builds:rb-${{ github.sha }}
             ghcr.io/sssomeshhh/llvm-builds:rb-${{ github.ref_name }}
           build-args: |
-            BASE_IMAGE_RELEASE=ubuntu:jammy
-            RELEASE_TAG=${{ github.ref_name }}
-            X=i
-            R=/root
+            BUILD_IMAGE_TAG=ghcr.io/sssomeshhh/llvm-builds:ib-${{ github.sha }}

@@ -5,7 +5,7 @@ docker build . \
     --file=package.Dockerfile \
     --tag=pack-$1d:temp \
     --target=llvm-package \
-    --build-arg BASE_IMAGE_PACKAGE=$3 \
+    --build-arg BUILD_IMAGE_TAG=$3 \
     --build-arg X=$1 \
     --build-arg R=$2;
 docker run \

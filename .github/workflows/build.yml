@@ -32,5 +32,4 @@ jobs:
             ghcr.io/sssomeshhh/llvm-builds:ib-${{ github.sha }}
             ghcr.io/sssomeshhh/llvm-builds:ib-${{ github.ref_name }}
           build-args: |
-            BASE_IMAGE_BUILD=ubuntu:jammy
             LLVM_VERSION_TAG=15.0.3

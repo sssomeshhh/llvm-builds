@@ -1,6 +1,4 @@
-ARG BASE_IMAGE_BUILD
-
-FROM $BASE_IMAGE_BUILD as llvm-build
+FROM ubuntu:jammy as llvm-build
 
 # install dependencies
 ENV DEBIAN_FRONTEND='noninteractive'

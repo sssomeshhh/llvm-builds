@@ -1,26 +1,8 @@
-ARG BASE_IMAGE_RELEASE
-
-FROM $BASE_IMAGE_RELEASE as llvm-release
+FROM ubuntu:jammy as llvm-release
 
 # set args
-ARG RELEASE_TAG
+ARG BUILD_IMAGE_TAG
 
-# set envs
-ENV LLVM_VERSION=$RELEASE_TAG
-
-# install dependencies
-ENV DEBIAN_FRONTEND='noninteractive'
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y curl tar xz-utils libc++-dev libc++abi-dev
-
-# set args
-ARG X
-ARG R
-
-# unpack artifacts
-WORKDIR /root
-RUN curl -Lo it.xz https://github.com/sssomeshhh/llvm-build/releases/download/$RELEASE_TAG/it.xz
-COPY unxz.sh .
-RUN ./unxz.sh $X $R
-RUN ./llvm/bin/clang --version
+# copy artifacts
+COPY --from=$BUILD_IMAGE_TAG /root/llvm/id/llvm /root
+RUN /root/llvm/bin/clang --version

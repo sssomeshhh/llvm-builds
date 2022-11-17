@@ -1,6 +1,6 @@
-ARG BASE_IMAGE_PACKAGE
+ARG BUILD_IMAGE_TAG
 
-FROM $BASE_IMAGE_PACKAGE as llvm-package
+FROM $BUILD_IMAGE_TAG as llvm-package
 
 # set args
 ARG X
