@@ -45,8 +45,8 @@ RUN cmake \
     -DLLVM_ENABLE_LIBCXX=ON \
     -DLLVM_ENABLE_LTO="Full" \
     -DLLVM_ENABLE_MODULES=ON \
-    -DLLVM_ENABLE_PROJECTS="all" \
-    -DLLVM_ENABLE_RUNTIMES="all" \
+    -DLLVM_ENABLE_PROJECTS="bolt;clang;clang-tools-extra;compiler-rt;cross-project-tests;libc;libclc;lld;lldb;mlir;openmp;polly;pstl" \
+    -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
     -DLLVM_PARALLEL_COMPILE_JOBS=$(nproc) \
     -DLLVM_PARALLEL_LINK_JOBS=1 \
     -DLLVM_STATIC_LINK_CXX_STDLIB=ON \
