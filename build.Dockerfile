@@ -39,10 +39,6 @@ RUN cmake \
     -DCMAKE_C_COMPILER="/usr/bin/clang-14" \
     -DCMAKE_CXX_COMPILER="/usr/bin/clang++-14" \
     -DCMAKE_CXX_FLAGS="-stdlib=libc++" \
-    -DCMAKE_INSTALL_PREFIX=$ID \
-    -DLLVM_ENABLE_PROJECTS="all" \
-    -DLLVM_INSTALL_UTILS=ON \
-    -DLLVM_PARALLEL_COMPILE_JOBS=$(nproc) \
-    -DLLVM_TARGETS_TO_BUILD="all"
+    -DCMAKE_INSTALL_PREFIX=$ID
 RUN cmake --build $BD
 RUN cmake --install $BD
