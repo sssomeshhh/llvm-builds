@@ -3,6 +3,7 @@ ARG BASE_IMAGE_BUILD
 FROM $BASE_IMAGE_BUILD as llvm-build
 
 # install dependencies
+ENV DEBIAN_FRONTEND='noninteractive'
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y curl git nano && \
