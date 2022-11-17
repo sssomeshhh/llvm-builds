@@ -109,3 +109,5 @@ jobs:
           build-args: |
             BASE_IMAGE_RELEASE=ubuntu:jammy
             RELEASE_TAG=${{ github.ref_name }}
+            X=i
+            R=/root

@@ -7,5 +7,6 @@ ARG X
 ARG R
 
 # pack artifacts
+WORKDIR /root
 COPY xz.sh .
 RUN ./xz.sh $X $R
