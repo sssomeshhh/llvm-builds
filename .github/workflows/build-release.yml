@@ -22,7 +22,7 @@ jobs:
           push: false
           outputs: type=docker,dest=/tmp/iBase.tar
           tags: |
-            build:base
+            sssomeshhh/llvm-br:build-base
           build-args: |
             LLVM_VERSION_TAG=15.0.3
       - name: Upload iBase.tar
@@ -56,9 +56,9 @@ jobs:
           push: false
           outputs: type=docker,dest=/tmp/iSetup.tar
           tags: |
-            build:setup
+            sssomeshhh/llvm-br:build-setup
           build-args: |
-            BASE_IMAGE=build:base
+            BASE_IMAGE=sssomeshhh/llvm-br:build-base
       - name: Upload iSetup.tar
         uses: actions/upload-artifact@v3.1.1
         with:
@@ -90,9 +90,9 @@ jobs:
           push: false
           outputs: type=docker,dest=/tmp/iChain.tar
           tags: |
-            build:chain
+            sssomeshhh/llvm-br:build-chain
           build-args: |
-            SETUP_IMAGE=build:setup
+            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup
       - name: Upload iChain.tar
         uses: actions/upload-artifact@v3.1.1
         with:
@@ -132,10 +132,10 @@ jobs:
           push: false
           outputs: type=docker,dest=/tmp/iSetup.tar
           tags: |
-            build:setup
+            sssomeshhh/llvm-br:build-setup
           build-args: |
-            BASE_IMAGE=build:base
-            CHAIN_IMAGE=build:chain
+            BASE_IMAGE=sssomeshhh/llvm-br:build-base
+            CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain
       - name: Upload iSetup.tar
         uses: actions/upload-artifact@v3.1.1
         with:
@@ -167,9 +167,9 @@ jobs:
           push: false
           outputs: type=docker,dest=/tmp/iChain.tar
           tags: |
-            build:chain
+            sssomeshhh/llvm-br:build-chain
           build-args: |
-            SETUP_IMAGE=build:setup
+            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup
       - name: Upload iChain.tar
         uses: actions/upload-artifact@v3.1.1
         with:
@@ -209,10 +209,10 @@ jobs:
           push: false
           outputs: type=docker,dest=/tmp/iSetup.tar
           tags: |
-            build:setup
+            sssomeshhh/llvm-br:build-setup
           build-args: |
-            BASE_IMAGE=build:base
-            CHAIN_IMAGE=build:chain
+            BASE_IMAGE=sssomeshhh/llvm-br:build-base
+            CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain
       - name: Upload iSetup.tar
         uses: actions/upload-artifact@v3.1.1
         with:
@@ -244,9 +244,9 @@ jobs:
           push: false
           outputs: type=docker,dest=/tmp/iChain.tar
           tags: |
-            build:chain
+            sssomeshhh/llvm-br:build-chain
           build-args: |
-            SETUP_IMAGE=build:setup
+            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup
       - name: Upload iChain.tar
         uses: actions/upload-artifact@v3.1.1
         with:
@@ -286,10 +286,10 @@ jobs:
           push: false
           outputs: type=docker,dest=/tmp/iSetup.tar
           tags: |
-            build:setup
+            sssomeshhh/llvm-br:build-setup
           build-args: |
-            BASE_IMAGE=build:base
-            CHAIN_IMAGE=build:chain
+            BASE_IMAGE=sssomeshhh/llvm-br:build-base
+            CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain
       - name: Upload iSetup.tar
         uses: actions/upload-artifact@v3.1.1
         with:
@@ -321,9 +321,9 @@ jobs:
           push: false
           outputs: type=docker,dest=/tmp/iChain.tar
           tags: |
-            build:chain
+            sssomeshhh/llvm-br:build-chain
           build-args: |
-            SETUP_IMAGE=build:setup
+            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup
       - name: Upload iChain.tar
         uses: actions/upload-artifact@v3.1.1
         with:
@@ -363,10 +363,10 @@ jobs:
           push: false
           outputs: type=docker,dest=/tmp/iSetup.tar
           tags: |
-            build:setup
+            sssomeshhh/llvm-br:build-setup
           build-args: |
-            BASE_IMAGE=build:base
-            CHAIN_IMAGE=build:chain
+            BASE_IMAGE=sssomeshhh/llvm-br:build-base
+            CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain
       - name: Upload iSetup.tar
         uses: actions/upload-artifact@v3.1.1
         with:
@@ -398,9 +398,9 @@ jobs:
           push: false
           outputs: type=docker,dest=/tmp/iChain.tar
           tags: |
-            build:chain
+            sssomeshhh/llvm-br:build-chain
           build-args: |
-            SETUP_IMAGE=build:setup
+            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup
       - name: Upload iChain.tar
         uses: actions/upload-artifact@v3.1.1
         with:
@@ -424,9 +424,9 @@ jobs:
           push: false
           outputs: type=docker,dest=/tmp/iEnd.tar
           tags: |
-            build:end
+            sssomeshhh/llvm-br:build-end
           build-args: |
-            CHAIN_IMAGE=build:chain
+            CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain
       - name: Upload iEnd.tar
         uses: actions/upload-artifact@v3.1.1
         with:
@@ -466,7 +466,7 @@ jobs:
             ghcr.io/sssomeshhh/llvm-builds:${{ github.sha }}
             ghcr.io/sssomeshhh/llvm-builds:${{ github.ref_name }}
           build-args: |
-            END_IMAGE=build:end
+            END_IMAGE=sssomeshhh/llvm-br:build-end
 
   release:
     runs-on: ubuntu-latest
@@ -501,7 +501,7 @@ jobs:
           tags: |
             pack:bd
           build-args: |
-            END_IMAGE=build:end
+            END_IMAGE=sssomeshhh/llvm-br:build-end
             X=b
             R=/root/llvm
       - name: Copy BD
@@ -535,7 +535,7 @@ jobs:
           tags: |
             pack:id
           build-args: |
-            END_IMAGE=build:end
+            END_IMAGE=sssomeshhh/llvm-br:build-end
             X=i
             R=/root/llvm
       - name: Copy ID
@@ -569,7 +569,7 @@ jobs:
           tags: |
             pack:sd
           build-args: |
-            END_IMAGE=build:end
+            END_IMAGE=sssomeshhh/llvm-br:build-end
             X=s
             R=/root/llvm
       - name: Copy SD
