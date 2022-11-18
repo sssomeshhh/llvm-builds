@@ -1,6 +1,6 @@
-ARG BASE_IMAGE
+ARG SETUP_IMAGE
 
-FROM $BASE_IMAGE as llvm-chain
+FROM $SETUP_IMAGE as chain
 
 # set args
 ARG BD=/root/llvm/bd/llvm

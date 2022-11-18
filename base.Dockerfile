@@ -1,4 +1,4 @@
-FROM ubuntu:jammy as llvm-base
+FROM ubuntu:jammy as base
 
 # install dependencies
 ENV DEBIAN_FRONTEND='noninteractive'

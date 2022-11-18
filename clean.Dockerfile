@@ -1,8 +1,8 @@
 ARG BASE_IMAGE
 
-FROM $BASE_IMAGE as llvm-base
+FROM $BASE_IMAGE as base
 
-FROM llvm-base as llvm-clean
+FROM base as clean
 
 # setup clang
 RUN apt-get install -y clang-14 lld-14 lldb-14 && \
