@@ -280,4 +280,4 @@ jobs:
             ghcr.io/sssomeshhh/llvm-builds:b-${{ github.sha }}
             ghcr.io/sssomeshhh/llvm-builds:b-${{ github.ref_name }}
           build-args: |
-            BASE_IMAGE=llvm-builds:chain
+            BASE_IMAGE=build:chain
