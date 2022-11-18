@@ -25,24 +25,11 @@ jobs:
             sssomeshhh/llvm-br:build-base
           build-args: |
             LLVM_VERSION_TAG=15.0.3
-      - name: Upload iBase.tar
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: iBase.tar
-          path: /tmp/iBase.tar
 
   setup-00:
     runs-on: ubuntu-22.04
     needs: [base]
     steps:
-      - name: Download iBase.tar
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: iBase.tar
-          path: /tmp/iBase.tar
-      - name: Load iBase.tar
-        run: |
-          docker load --input /tmp/iBase.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -59,24 +46,11 @@ jobs:
             sssomeshhh/llvm-br:build-setup
           build-args: |
             BASE_IMAGE=sssomeshhh/llvm-br:build-base
-      - name: Upload iSetup.tar
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: iSetup.tar
-          path: /tmp/iSetup.tar
 
   chain-00:
     runs-on: ubuntu-22.04
     needs: [setup-00]
     steps:
-      - name: Download iSetup.tar
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: iSetup.tar
-          path: /tmp/iSetup.tar
-      - name: Load iSetup.tar
-        run: |
-          docker load --input /tmp/iSetup.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -93,32 +67,11 @@ jobs:
             sssomeshhh/llvm-br:build-chain
           build-args: |
             SETUP_IMAGE=sssomeshhh/llvm-br:build-setup
-      - name: Upload iChain.tar
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: iChain.tar
-          path: /tmp/iChain.tar
 
   setup-01:
     runs-on: ubuntu-22.04
     needs: [chain-00]
     steps:
-      - name: Download iBase.tar
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: iBase.tar
-          path: /tmp/iBase.tar
-      - name: Load iBase.tar
-        run: |
-          docker load --input /tmp/iBase.tar
-      - name: Download iChain.tar
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: iChain.tar
-          path: /tmp/iChain.tar
-      - name: Load iChain.tar
-        run: |
-          docker load --input /tmp/iChain.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -136,24 +89,11 @@ jobs:
           build-args: |
             BASE_IMAGE=sssomeshhh/llvm-br:build-base
             CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain
-      - name: Upload iSetup.tar
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: iSetup.tar
-          path: /tmp/iSetup.tar
 
   chain-01:
     runs-on: ubuntu-22.04
     needs: [setup-01]
     steps:
-      - name: Download iSetup.tar
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: iSetup.tar
-          path: /tmp/iSetup.tar
-      - name: Load iSetup.tar
-        run: |
-          docker load --input /tmp/iSetup.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -170,32 +110,11 @@ jobs:
             sssomeshhh/llvm-br:build-chain
           build-args: |
             SETUP_IMAGE=sssomeshhh/llvm-br:build-setup
-      - name: Upload iChain.tar
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: iChain.tar
-          path: /tmp/iChain.tar
 
   setup-02:
     runs-on: ubuntu-22.04
     needs: [chain-01]
     steps:
-      - name: Download iBase.tar
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: iBase.tar
-          path: /tmp/iBase.tar
-      - name: Load iBase.tar
-        run: |
-          docker load --input /tmp/iBase.tar
-      - name: Download iChain.tar
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: iChain.tar
-          path: /tmp/iChain.tar
-      - name: Load iChain.tar
-        run: |
-          docker load --input /tmp/iChain.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -213,24 +132,11 @@ jobs:
           build-args: |
             BASE_IMAGE=sssomeshhh/llvm-br:build-base
             CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain
-      - name: Upload iSetup.tar
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: iSetup.tar
-          path: /tmp/iSetup.tar
 
   chain-02:
     runs-on: ubuntu-22.04
     needs: [setup-02]
     steps:
-      - name: Download iSetup.tar
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: iSetup.tar
-          path: /tmp/iSetup.tar
-      - name: Load iSetup.tar
-        run: |
-          docker load --input /tmp/iSetup.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -247,32 +153,11 @@ jobs:
             sssomeshhh/llvm-br:build-chain
           build-args: |
             SETUP_IMAGE=sssomeshhh/llvm-br:build-setup
-      - name: Upload iChain.tar
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: iChain.tar
-          path: /tmp/iChain.tar
 
   setup-03:
     runs-on: ubuntu-22.04
     needs: [chain-02]
     steps:
-      - name: Download iBase.tar
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: iBase.tar
-          path: /tmp/iBase.tar
-      - name: Load iBase.tar
-        run: |
-          docker load --input /tmp/iBase.tar
-      - name: Download iChain.tar
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: iChain.tar
-          path: /tmp/iChain.tar
-      - name: Load iChain.tar
-        run: |
-          docker load --input /tmp/iChain.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -290,24 +175,11 @@ jobs:
           build-args: |
             BASE_IMAGE=sssomeshhh/llvm-br:build-base
             CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain
-      - name: Upload iSetup.tar
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: iSetup.tar
-          path: /tmp/iSetup.tar
 
   chain-03:
     runs-on: ubuntu-22.04
     needs: [setup-03]
     steps:
-      - name: Download iSetup.tar
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: iSetup.tar
-          path: /tmp/iSetup.tar
-      - name: Load iSetup.tar
-        run: |
-          docker load --input /tmp/iSetup.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -324,32 +196,11 @@ jobs:
             sssomeshhh/llvm-br:build-chain
           build-args: |
             SETUP_IMAGE=sssomeshhh/llvm-br:build-setup
-      - name: Upload iChain.tar
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: iChain.tar
-          path: /tmp/iChain.tar
 
   setup-04:
     runs-on: ubuntu-22.04
     needs: [chain-03]
     steps:
-      - name: Download iBase.tar
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: iBase.tar
-          path: /tmp/iBase.tar
-      - name: Load iBase.tar
-        run: |
-          docker load --input /tmp/iBase.tar
-      - name: Download iChain.tar
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: iChain.tar
-          path: /tmp/iChain.tar
-      - name: Load iChain.tar
-        run: |
-          docker load --input /tmp/iChain.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -367,24 +218,11 @@ jobs:
           build-args: |
             BASE_IMAGE=sssomeshhh/llvm-br:build-base
             CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain
-      - name: Upload iSetup.tar
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: iSetup.tar
-          path: /tmp/iSetup.tar
 
   chain-04:
     runs-on: ubuntu-22.04
     needs: [setup-04]
     steps:
-      - name: Download iSetup.tar
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: iSetup.tar
-          path: /tmp/iSetup.tar
-      - name: Load iSetup.tar
-        run: |
-          docker load --input /tmp/iSetup.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -401,11 +239,6 @@ jobs:
             sssomeshhh/llvm-br:build-chain
           build-args: |
             SETUP_IMAGE=sssomeshhh/llvm-br:build-setup
-      - name: Upload iChain.tar
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: iChain.tar
-          path: /tmp/iChain.tar
 
   end:
     runs-on: ubuntu-22.04
@@ -427,24 +260,11 @@ jobs:
             sssomeshhh/llvm-br:build-end
           build-args: |
             CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain
-      - name: Upload iEnd.tar
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: iEnd.tar
-          path: /tmp/iEnd.tar
 
   push:
     runs-on: ubuntu-22.04
     needs: [end]
     steps:
-      - name: Download iEnd.tar
-        uses: actions/download-artifact@v3.0.1
-        with:
-          name: iEnd.tar
-          path: /tmp/iEnd.tar
-      - name: Load iEnd.tar
-        run: |
-          docker load --input /tmp/iEnd.tar
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2.1.0
         with:
