@@ -8,7 +8,8 @@ RUN apt-get update && \
     apt-get install -y ccache cmake make ninja-build && \
     apt-get install -y clang-14 lld-14 lldb-14 && \
     apt-get install -y libc++-dev libc++abi-dev && \
-    apt-get install -y gzip lz4 tar xz-utils zlib1g-dev
+    apt-get install -y gzip lz4 tar xz-utils zlib1g-dev && \
+    apt-get install -y python3 python3-pip python3-venv
 
 # set args
 ARG LLVM_VERSION_TAG
