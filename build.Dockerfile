@@ -40,7 +40,6 @@ RUN cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_C_COMPILER="/usr/bin/clang-14" \
     -DCMAKE_CXX_COMPILER="/usr/bin/clang++-14" \
-    -DCMAKE_CXX_FLAGS="-stdlib=libc++" \
     -DCMAKE_INSTALL_PREFIX=$ID \
   # llvm opt-var
     -DLLVM_ENABLE_LIBCXX=ON \
