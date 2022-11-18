@@ -24,7 +24,7 @@ jobs:
           load: true
           push: false
           tags: |
-            llvm-builds:base
+            build:base
           build-args: |
             LLVM_VERSION_TAG=15.0.3
 
@@ -46,9 +46,9 @@ jobs:
           load: true
           push: false
           tags: |
-            llvm-builds:clean
+            build:clean
           build-args: |
-            BASE_IMAGE=llvm-builds:base
+            BASE_IMAGE=build:base
 
   build-00:
     runs-on: ubuntu-22.04
@@ -68,9 +68,9 @@ jobs:
           load: true
           push: false
           tags: |
-            llvm-builds:chain
+            build:chain
           build-args: |
-            BASE_IMAGE=llvm-builds:clean
+            BASE_IMAGE=build:clean
 
   setup-01:
     runs-on: ubuntu-22.04
@@ -90,10 +90,10 @@ jobs:
           load: true
           push: false
           tags: |
-            llvm-builds:stage
+            build:stage
           build-args: |
-            BASE_IMAGE=llvm-builds:base
-            CHAIN_IMAGE=llvm-builds:chain
+            BASE_IMAGE=build:base
+            CHAIN_IMAGE=build:chain
 
   build-01:
     runs-on: ubuntu-22.04
@@ -113,9 +113,9 @@ jobs:
           load: true
           push: false
           tags: |
-            llvm-builds:chain
+            build:chain
           build-args: |
-            BASE_IMAGE=llvm-builds:stage
+            BASE_IMAGE=build:stage
 
   setup-02:
     runs-on: ubuntu-22.04
@@ -135,10 +135,10 @@ jobs:
           load: true
           push: false
           tags: |
-            llvm-builds:stage
+            build:stage
           build-args: |
-            BASE_IMAGE=llvm-builds:base
-            CHAIN_IMAGE=llvm-builds:chain
+            BASE_IMAGE=build:base
+            CHAIN_IMAGE=build:chain
 
   build-02:
     runs-on: ubuntu-22.04
@@ -158,9 +158,9 @@ jobs:
           load: true
           push: false
           tags: |
-            llvm-builds:chain
+            build:chain
           build-args: |
-            BASE_IMAGE=llvm-builds:stage
+            BASE_IMAGE=build:stage
 
   setup-03:
     runs-on: ubuntu-22.04
@@ -180,10 +180,10 @@ jobs:
           load: true
           push: false
           tags: |
-            llvm-builds:stage
+            build:stage
           build-args: |
-            BASE_IMAGE=llvm-builds:base
-            CHAIN_IMAGE=llvm-builds:chain
+            BASE_IMAGE=build:base
+            CHAIN_IMAGE=build:chain
 
   build-03:
     runs-on: ubuntu-22.04
@@ -203,9 +203,9 @@ jobs:
           load: true
           push: false
           tags: |
-            llvm-builds:chain
+            build:chain
           build-args: |
-            BASE_IMAGE=llvm-builds:stage
+            BASE_IMAGE=build:stage
 
   setup-04:
     runs-on: ubuntu-22.04
@@ -225,10 +225,10 @@ jobs:
           load: true
           push: false
           tags: |
-            llvm-builds:stage
+            build:stage
           build-args: |
-            BASE_IMAGE=llvm-builds:base
-            CHAIN_IMAGE=llvm-builds:chain
+            BASE_IMAGE=build:base
+            CHAIN_IMAGE=build:chain
 
   build-04:
     runs-on: ubuntu-22.04
@@ -248,9 +248,9 @@ jobs:
           load: true
           push: false
           tags: |
-            llvm-builds:chain
+            build:chain
           build-args: |
-            BASE_IMAGE=llvm-builds:stage
+            BASE_IMAGE=build:stage
 
   push-00:
     runs-on: ubuntu-22.04
