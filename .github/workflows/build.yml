@@ -6,8 +6,255 @@ on:
       - "*"
 
 jobs:
-  build:
+  base:
     runs-on: ubuntu-22.04
+    needs: []
+    steps:
+      - name: Setup Buildx
+        id: setup_buildx
+        uses: docker/setup-buildx-action@v2.2.1
+
+      - name: Build Load Base
+        id: build_load_base
+        uses: docker/build-push-action@v3.2.0
+        with:
+          builder: ${{ steps.setup_buildx.name }}
+          file: base.Dockerfile
+          target: llvm-base
+          load: true
+          push: false
+          tags: |
+            llvm-builds:base
+          build-args: |
+            LLVM_VERSION_TAG=15.0.3
+
+  setup-00:
+    runs-on: ubuntu-22.04
+    needs: [base]
+    steps:
+      - name: Setup Buildx
+        id: setup_buildx
+        uses: docker/setup-buildx-action@v2.2.1
+
+      - name: Build Load Clean
+        id: build_load_clean
+        uses: docker/build-push-action@v3.2.0
+        with:
+          builder: ${{ steps.setup_buildx.name }}
+          file: base.setup.clean.Dockerfile
+          target: llvm-clean
+          load: true
+          push: false
+          tags: |
+            llvm-builds:clean
+          build-args: |
+            BASE_IMAGE=llvm-builds:base
+
+  build-00:
+    runs-on: ubuntu-22.04
+    needs: [setup-00]
+    steps:
+      - name: Setup Buildx
+        id: setup_buildx
+        uses: docker/setup-buildx-action@v2.2.1
+
+      - name: Build Load Chain
+        id: build_load_chain
+        uses: docker/build-push-action@v3.2.0
+        with:
+          builder: ${{ steps.setup_buildx.name }}
+          file: build.chain.Dockerfile
+          target: llvm-chain
+          load: true
+          push: false
+          tags: |
+            llvm-builds:chain
+          build-args: |
+            BASE_IMAGE=llvm-builds:clean
+
+  setup-01:
+    runs-on: ubuntu-22.04
+    needs: [build-00]
+    steps:
+      - name: Setup Buildx
+        id: setup_buildx
+        uses: docker/setup-buildx-action@v2.2.1
+
+      - name: Build Load Stage
+        id: build_load_stage
+        uses: docker/build-push-action@v3.2.0
+        with:
+          builder: ${{ steps.setup_buildx.name }}
+          file: base.setup.stage.Dockerfile
+          target: llvm-stage
+          load: true
+          push: false
+          tags: |
+            llvm-builds:stage
+          build-args: |
+            BASE_IMAGE=llvm-builds:base
+            CHAIN_IMAGE=llvm-builds:chain
+
+  build-01:
+    runs-on: ubuntu-22.04
+    needs: [setup-01]
+    steps:
+      - name: Setup Buildx
+        id: setup_buildx
+        uses: docker/setup-buildx-action@v2.2.1
+
+      - name: Build Load Chain
+        id: build_load_chain
+        uses: docker/build-push-action@v3.2.0
+        with:
+          builder: ${{ steps.setup_buildx.name }}
+          file: build.chain.Dockerfile
+          target: llvm-chain
+          load: true
+          push: false
+          tags: |
+            llvm-builds:chain
+          build-args: |
+            BASE_IMAGE=llvm-builds:stage
+
+  setup-02:
+    runs-on: ubuntu-22.04
+    needs: [build-01]
+    steps:
+      - name: Setup Buildx
+        id: setup_buildx
+        uses: docker/setup-buildx-action@v2.2.1
+
+      - name: Build Load Stage
+        id: build_load_stage
+        uses: docker/build-push-action@v3.2.0
+        with:
+          builder: ${{ steps.setup_buildx.name }}
+          file: base.setup.stage.Dockerfile
+          target: llvm-stage
+          load: true
+          push: false
+          tags: |
+            llvm-builds:stage
+          build-args: |
+            BASE_IMAGE=llvm-builds:base
+            CHAIN_IMAGE=llvm-builds:chain
+
+  build-02:
+    runs-on: ubuntu-22.04
+    needs: [setup-02]
+    steps:
+      - name: Setup Buildx
+        id: setup_buildx
+        uses: docker/setup-buildx-action@v2.2.1
+
+      - name: Build Load Chain
+        id: build_load_chain
+        uses: docker/build-push-action@v3.2.0
+        with:
+          builder: ${{ steps.setup_buildx.name }}
+          file: build.chain.Dockerfile
+          target: llvm-chain
+          load: true
+          push: false
+          tags: |
+            llvm-builds:chain
+          build-args: |
+            BASE_IMAGE=llvm-builds:stage
+
+  setup-03:
+    runs-on: ubuntu-22.04
+    needs: [build-02]
+    steps:
+      - name: Setup Buildx
+        id: setup_buildx
+        uses: docker/setup-buildx-action@v2.2.1
+
+      - name: Build Load Stage
+        id: build_load_stage
+        uses: docker/build-push-action@v3.2.0
+        with:
+          builder: ${{ steps.setup_buildx.name }}
+          file: base.setup.stage.Dockerfile
+          target: llvm-stage
+          load: true
+          push: false
+          tags: |
+            llvm-builds:stage
+          build-args: |
+            BASE_IMAGE=llvm-builds:base
+            CHAIN_IMAGE=llvm-builds:chain
+
+  build-03:
+    runs-on: ubuntu-22.04
+    needs: [setup-03]
+    steps:
+      - name: Setup Buildx
+        id: setup_buildx
+        uses: docker/setup-buildx-action@v2.2.1
+
+      - name: Build Load Chain
+        id: build_load_chain
+        uses: docker/build-push-action@v3.2.0
+        with:
+          builder: ${{ steps.setup_buildx.name }}
+          file: build.chain.Dockerfile
+          target: llvm-chain
+          load: true
+          push: false
+          tags: |
+            llvm-builds:chain
+          build-args: |
+            BASE_IMAGE=llvm-builds:stage
+
+  setup-04:
+    runs-on: ubuntu-22.04
+    needs: [build-03]
+    steps:
+      - name: Setup Buildx
+        id: setup_buildx
+        uses: docker/setup-buildx-action@v2.2.1
+
+      - name: Build Load Stage
+        id: build_load_stage
+        uses: docker/build-push-action@v3.2.0
+        with:
+          builder: ${{ steps.setup_buildx.name }}
+          file: base.setup.stage.Dockerfile
+          target: llvm-stage
+          load: true
+          push: false
+          tags: |
+            llvm-builds:stage
+          build-args: |
+            BASE_IMAGE=llvm-builds:base
+            CHAIN_IMAGE=llvm-builds:chain
+
+  build-04:
+    runs-on: ubuntu-22.04
+    needs: [setup-04]
+    steps:
+      - name: Setup Buildx
+        id: setup_buildx
+        uses: docker/setup-buildx-action@v2.2.1
+
+      - name: Build Load Chain
+        id: build_load_chain
+        uses: docker/build-push-action@v3.2.0
+        with:
+          builder: ${{ steps.setup_buildx.name }}
+          file: build.chain.Dockerfile
+          target: llvm-chain
+          load: true
+          push: false
+          tags: |
+            llvm-builds:chain
+          build-args: |
+            BASE_IMAGE=llvm-builds:stage
+
+  push-00:
+    runs-on: ubuntu-22.04
+    needs: [build-04]
     steps:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2.1.0
@@ -16,20 +263,21 @@ jobs:
           username: sssomeshhh
           password: ${{ secrets.GH_PACKAGES_TOKEN }}
 
-      - name: Setup Docker Buildx
+      - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
 
-      - name: Build Docker Image
-        id: docker_build_push
+      - name: Build Push Final
+        id: build_push_final
         uses: docker/build-push-action@v3.2.0
         with:
           builder: ${{ steps.setup_buildx.name }}
-          file: build.Dockerfile
-          target: llvm-build
+          file: build.final.Dockerfile
+          target: llvm-push
+          load: false
           push: true
           tags: |
-            ghcr.io/sssomeshhh/llvm-builds:ib-${{ github.sha }}
-            ghcr.io/sssomeshhh/llvm-builds:ib-${{ github.ref_name }}
+            ghcr.io/sssomeshhh/llvm-builds:b-${{ github.sha }}
+            ghcr.io/sssomeshhh/llvm-builds:b-${{ github.ref_name }}
           build-args: |
-            LLVM_VERSION_TAG=15.0.3
+            BASE_IMAGE=llvm-builds:chain
