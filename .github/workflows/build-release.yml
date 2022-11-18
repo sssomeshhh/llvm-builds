@@ -19,8 +19,7 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: base.Dockerfile
           target: base
-          push: false
-          outputs: type=docker,dest=/tmp/iBase.tar
+          push: true
           tags: |
             sssomeshhh/llvm-br:build-base
           build-args: |
@@ -40,8 +39,7 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: clean.Dockerfile
           target: clean
-          push: false
-          outputs: type=docker,dest=/tmp/iSetup.tar
+          push: true
           tags: |
             sssomeshhh/llvm-br:build-setup
           build-args: |
@@ -61,8 +59,7 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: chain.Dockerfile
           target: chain
-          push: false
-          outputs: type=docker,dest=/tmp/iChain.tar
+          push: true
           tags: |
             sssomeshhh/llvm-br:build-chain
           build-args: |
@@ -82,8 +79,7 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: stage.Dockerfile
           target: stage
-          push: false
-          outputs: type=docker,dest=/tmp/iSetup.tar
+          push: true
           tags: |
             sssomeshhh/llvm-br:build-setup
           build-args: |
@@ -104,8 +100,7 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: chain.Dockerfile
           target: chain
-          push: false
-          outputs: type=docker,dest=/tmp/iChain.tar
+          push: true
           tags: |
             sssomeshhh/llvm-br:build-chain
           build-args: |
@@ -125,8 +120,7 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: stage.Dockerfile
           target: stage
-          push: false
-          outputs: type=docker,dest=/tmp/iSetup.tar
+          push: true
           tags: |
             sssomeshhh/llvm-br:build-setup
           build-args: |
@@ -147,8 +141,7 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: chain.Dockerfile
           target: chain
-          push: false
-          outputs: type=docker,dest=/tmp/iChain.tar
+          push: true
           tags: |
             sssomeshhh/llvm-br:build-chain
           build-args: |
@@ -168,8 +161,7 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: stage.Dockerfile
           target: stage
-          push: false
-          outputs: type=docker,dest=/tmp/iSetup.tar
+          push: true
           tags: |
             sssomeshhh/llvm-br:build-setup
           build-args: |
@@ -190,8 +182,7 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: chain.Dockerfile
           target: chain
-          push: false
-          outputs: type=docker,dest=/tmp/iChain.tar
+          push: true
           tags: |
             sssomeshhh/llvm-br:build-chain
           build-args: |
@@ -211,8 +202,7 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: stage.Dockerfile
           target: stage
-          push: false
-          outputs: type=docker,dest=/tmp/iSetup.tar
+          push: true
           tags: |
             sssomeshhh/llvm-br:build-setup
           build-args: |
@@ -233,8 +223,7 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: chain.Dockerfile
           target: chain
-          push: false
-          outputs: type=docker,dest=/tmp/iChain.tar
+          push: true
           tags: |
             sssomeshhh/llvm-br:build-chain
           build-args: |
@@ -254,8 +243,7 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: end.Dockerfile
           target: end
-          push: false
-          outputs: type=docker,dest=/tmp/iEnd.tar
+          push: true
           tags: |
             sssomeshhh/llvm-br:build-end
           build-args: |
