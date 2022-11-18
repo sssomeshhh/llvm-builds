@@ -1,11 +1,13 @@
 name: build
 
-on: [push]
+on:
+  push:
+    tags:
+      - "*"
 
 jobs:
   base:
     runs-on: ubuntu-22.04
-    needs: []
     steps:
       - name: Setup Buildx
         id: setup_buildx
@@ -17,17 +19,30 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: base.Dockerfile
           target: base
-          load: true
           push: false
+          outputs: type=docker,dest=/tmp/iBase.tar
           tags: |
             build:base
           build-args: |
             LLVM_VERSION_TAG=15.0.3
+      - name: Upload iBase.tar
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: iBase.tar
+          path: /tmp/iBase.tar
 
   setup-00:
     runs-on: ubuntu-22.04
     needs: [base]
     steps:
+      - name: Download iBase.tar
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: iBase.tar
+          path: /tmp/iBase.tar
+      - name: Load iBase.tar
+        run: |
+          docker load --input /tmp/iBase.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -38,17 +53,30 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: clean.Dockerfile
           target: clean
-          load: true
           push: false
+          outputs: type=docker,dest=/tmp/iSetup.tar
           tags: |
             build:setup
           build-args: |
             BASE_IMAGE=build:base
+      - name: Upload iSetup.tar
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: iSetup.tar
+          path: /tmp/iSetup.tar
 
-  build-00:
+  chain-00:
     runs-on: ubuntu-22.04
     needs: [setup-00]
     steps:
+      - name: Download iSetup.tar
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: iSetup.tar
+          path: /tmp/iSetup.tar
+      - name: Load iSetup.tar
+        run: |
+          docker load --input /tmp/iSetup.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -59,17 +87,38 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: chain.Dockerfile
           target: chain
-          load: true
           push: false
+          outputs: type=docker,dest=/tmp/iChain.tar
           tags: |
             build:chain
           build-args: |
             SETUP_IMAGE=build:setup
+      - name: Upload iChain.tar
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: iChain.tar
+          path: /tmp/iChain.tar
 
   setup-01:
     runs-on: ubuntu-22.04
-    needs: [build-00]
+    needs: [chain-00]
     steps:
+      - name: Download iBase.tar
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: iBase.tar
+          path: /tmp/iBase.tar
+      - name: Load iBase.tar
+        run: |
+          docker load --input /tmp/iBase.tar
+      - name: Download iChain.tar
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: iChain.tar
+          path: /tmp/iChain.tar
+      - name: Load iChain.tar
+        run: |
+          docker load --input /tmp/iChain.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -80,18 +129,31 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: stage.Dockerfile
           target: stage
-          load: true
           push: false
+          outputs: type=docker,dest=/tmp/iSetup.tar
           tags: |
             build:setup
           build-args: |
             BASE_IMAGE=build:base
             CHAIN_IMAGE=build:chain
+      - name: Upload iSetup.tar
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: iSetup.tar
+          path: /tmp/iSetup.tar
 
-  build-01:
+  chain-01:
     runs-on: ubuntu-22.04
     needs: [setup-01]
     steps:
+      - name: Download iSetup.tar
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: iSetup.tar
+          path: /tmp/iSetup.tar
+      - name: Load iSetup.tar
+        run: |
+          docker load --input /tmp/iSetup.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -102,17 +164,38 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: chain.Dockerfile
           target: chain
-          load: true
           push: false
+          outputs: type=docker,dest=/tmp/iChain.tar
           tags: |
             build:chain
           build-args: |
             SETUP_IMAGE=build:setup
+      - name: Upload iChain.tar
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: iChain.tar
+          path: /tmp/iChain.tar
 
   setup-02:
     runs-on: ubuntu-22.04
-    needs: [build-01]
+    needs: [chain-01]
     steps:
+      - name: Download iBase.tar
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: iBase.tar
+          path: /tmp/iBase.tar
+      - name: Load iBase.tar
+        run: |
+          docker load --input /tmp/iBase.tar
+      - name: Download iChain.tar
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: iChain.tar
+          path: /tmp/iChain.tar
+      - name: Load iChain.tar
+        run: |
+          docker load --input /tmp/iChain.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -123,18 +206,31 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: stage.Dockerfile
           target: stage
-          load: true
           push: false
+          outputs: type=docker,dest=/tmp/iSetup.tar
           tags: |
             build:setup
           build-args: |
             BASE_IMAGE=build:base
             CHAIN_IMAGE=build:chain
+      - name: Upload iSetup.tar
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: iSetup.tar
+          path: /tmp/iSetup.tar
 
-  build-02:
+  chain-02:
     runs-on: ubuntu-22.04
     needs: [setup-02]
     steps:
+      - name: Download iSetup.tar
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: iSetup.tar
+          path: /tmp/iSetup.tar
+      - name: Load iSetup.tar
+        run: |
+          docker load --input /tmp/iSetup.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -145,17 +241,38 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: chain.Dockerfile
           target: chain
-          load: true
           push: false
+          outputs: type=docker,dest=/tmp/iChain.tar
           tags: |
             build:chain
           build-args: |
             SETUP_IMAGE=build:setup
+      - name: Upload iChain.tar
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: iChain.tar
+          path: /tmp/iChain.tar
 
   setup-03:
     runs-on: ubuntu-22.04
-    needs: [build-02]
+    needs: [chain-02]
     steps:
+      - name: Download iBase.tar
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: iBase.tar
+          path: /tmp/iBase.tar
+      - name: Load iBase.tar
+        run: |
+          docker load --input /tmp/iBase.tar
+      - name: Download iChain.tar
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: iChain.tar
+          path: /tmp/iChain.tar
+      - name: Load iChain.tar
+        run: |
+          docker load --input /tmp/iChain.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -166,18 +283,31 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: stage.Dockerfile
           target: stage
-          load: true
           push: false
+          outputs: type=docker,dest=/tmp/iSetup.tar
           tags: |
             build:setup
           build-args: |
             BASE_IMAGE=build:base
             CHAIN_IMAGE=build:chain
+      - name: Upload iSetup.tar
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: iSetup.tar
+          path: /tmp/iSetup.tar
 
-  build-03:
+  chain-03:
     runs-on: ubuntu-22.04
     needs: [setup-03]
     steps:
+      - name: Download iSetup.tar
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: iSetup.tar
+          path: /tmp/iSetup.tar
+      - name: Load iSetup.tar
+        run: |
+          docker load --input /tmp/iSetup.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -188,17 +318,38 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: chain.Dockerfile
           target: chain
-          load: true
           push: false
+          outputs: type=docker,dest=/tmp/iChain.tar
           tags: |
             build:chain
           build-args: |
             SETUP_IMAGE=build:setup
+      - name: Upload iChain.tar
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: iChain.tar
+          path: /tmp/iChain.tar
 
   setup-04:
     runs-on: ubuntu-22.04
-    needs: [build-03]
+    needs: [chain-03]
     steps:
+      - name: Download iBase.tar
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: iBase.tar
+          path: /tmp/iBase.tar
+      - name: Load iBase.tar
+        run: |
+          docker load --input /tmp/iBase.tar
+      - name: Download iChain.tar
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: iChain.tar
+          path: /tmp/iChain.tar
+      - name: Load iChain.tar
+        run: |
+          docker load --input /tmp/iChain.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -209,18 +360,31 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: stage.Dockerfile
           target: stage
-          load: true
           push: false
+          outputs: type=docker,dest=/tmp/iSetup.tar
           tags: |
             build:setup
           build-args: |
             BASE_IMAGE=build:base
             CHAIN_IMAGE=build:chain
+      - name: Upload iSetup.tar
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: iSetup.tar
+          path: /tmp/iSetup.tar
 
-  build-04:
+  chain-04:
     runs-on: ubuntu-22.04
     needs: [setup-04]
     steps:
+      - name: Download iSetup.tar
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: iSetup.tar
+          path: /tmp/iSetup.tar
+      - name: Load iSetup.tar
+        run: |
+          docker load --input /tmp/iSetup.tar
       - name: Setup Buildx
         id: setup_buildx
         uses: docker/setup-buildx-action@v2.2.1
@@ -231,16 +395,21 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: chain.Dockerfile
           target: chain
-          load: true
           push: false
+          outputs: type=docker,dest=/tmp/iChain.tar
           tags: |
             build:chain
           build-args: |
             SETUP_IMAGE=build:setup
+      - name: Upload iChain.tar
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: iChain.tar
+          path: /tmp/iChain.tar
 
   end:
     runs-on: ubuntu-22.04
-    needs: [build-04]
+    needs: [chain-04]
     steps:
       - name: Setup Buildx
         id: setup_buildx
@@ -252,17 +421,30 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: end.Dockerfile
           target: end
-          load: true
           push: false
+          outputs: type=docker,dest=/tmp/iEnd.tar
           tags: |
             build:end
           build-args: |
             CHAIN_IMAGE=build:chain
+      - name: Upload iEnd.tar
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: iEnd.tar
+          path: /tmp/iEnd.tar
 
   push:
     runs-on: ubuntu-22.04
     needs: [end]
     steps:
+      - name: Download iEnd.tar
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: iEnd.tar
+          path: /tmp/iEnd.tar
+      - name: Load iEnd.tar
+        run: |
+          docker load --input /tmp/iEnd.tar
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2.1.0
         with:
@@ -315,7 +497,6 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: pack.Dockerfile
           target: pack
-          load: true
           push: false
           tags: |
             pack:bd
@@ -350,7 +531,6 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: pack.Dockerfile
           target: pack
-          load: true
           push: false
           tags: |
             pack:id
@@ -385,7 +565,6 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: pack.Dockerfile
           target: pack
-          load: true
           push: false
           tags: |
             pack:sd
