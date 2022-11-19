@@ -2,7 +2,7 @@ ARG END_IMAGE
 
 FROM $END_IMAGE as end
 
-FROM ubuntu:jammy as llvm-push
+FROM ubuntu:jammy as push
 
 # install dependencies
 RUN apt-get update && \

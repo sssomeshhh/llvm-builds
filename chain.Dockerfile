@@ -26,6 +26,5 @@ RUN cmake \
 #    -DLLVM_STATIC_LINK_CXX_STDLIB=ON \
 #    -DLLVM_TARGETS_TO_BUILD="all" \
 #    -DLLVM_USE_LINKER="lld"
-
 RUN cmake --build $BD
 RUN cmake --install $BD
