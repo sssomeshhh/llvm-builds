@@ -27,7 +27,7 @@ jobs:
           target: base
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-base
+            sssomeshhh/llvm-br:build-base-${{ github.sha }}
           build-args: |
             LLVM_VERSION_TAG=15.0.3
 
@@ -53,9 +53,9 @@ jobs:
           target: clean
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-setup
+            sssomeshhh/llvm-br:build-setup-${{ github.sha }}
           build-args: |
-            BASE_IMAGE=sssomeshhh/llvm-br:build-base
+            BASE_IMAGE=sssomeshhh/llvm-br:build-base-${{ github.sha }}
 
   chain-00:
     runs-on: ubuntu-22.04
@@ -79,9 +79,9 @@ jobs:
           target: chain
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-chain
+            sssomeshhh/llvm-br:build-chain-${{ github.sha }}
           build-args: |
-            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup
+            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-${{ github.sha }}
 
   setup-01:
     runs-on: ubuntu-22.04
@@ -105,10 +105,10 @@ jobs:
           target: stage
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-setup
+            sssomeshhh/llvm-br:build-setup-${{ github.sha }}
           build-args: |
-            BASE_IMAGE=sssomeshhh/llvm-br:build-base
-            CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain
+            BASE_IMAGE=sssomeshhh/llvm-br:build-base-${{ github.sha }}
+            CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain-${{ github.sha }}
 
   chain-01:
     runs-on: ubuntu-22.04
@@ -132,9 +132,9 @@ jobs:
           target: chain
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-chain
+            sssomeshhh/llvm-br:build-chain-${{ github.sha }}
           build-args: |
-            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup
+            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-${{ github.sha }}
 
   setup-02:
     runs-on: ubuntu-22.04
@@ -158,10 +158,10 @@ jobs:
           target: stage
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-setup
+            sssomeshhh/llvm-br:build-setup-${{ github.sha }}
           build-args: |
-            BASE_IMAGE=sssomeshhh/llvm-br:build-base
-            CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain
+            BASE_IMAGE=sssomeshhh/llvm-br:build-base-${{ github.sha }}
+            CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain-${{ github.sha }}
 
   chain-02:
     runs-on: ubuntu-22.04
@@ -185,9 +185,9 @@ jobs:
           target: chain
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-chain
+            sssomeshhh/llvm-br:build-chain-${{ github.sha }}
           build-args: |
-            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup
+            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-${{ github.sha }}
 
   setup-03:
     runs-on: ubuntu-22.04
@@ -211,10 +211,10 @@ jobs:
           target: stage
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-setup
+            sssomeshhh/llvm-br:build-setup-${{ github.sha }}
           build-args: |
-            BASE_IMAGE=sssomeshhh/llvm-br:build-base
-            CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain
+            BASE_IMAGE=sssomeshhh/llvm-br:build-base-${{ github.sha }}
+            CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain-${{ github.sha }}
 
   chain-03:
     runs-on: ubuntu-22.04
@@ -238,9 +238,9 @@ jobs:
           target: chain
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-chain
+            sssomeshhh/llvm-br:build-chain-${{ github.sha }}
           build-args: |
-            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup
+            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-${{ github.sha }}
 
   setup-04:
     runs-on: ubuntu-22.04
@@ -264,10 +264,10 @@ jobs:
           target: stage
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-setup
+            sssomeshhh/llvm-br:build-setup-${{ github.sha }}
           build-args: |
-            BASE_IMAGE=sssomeshhh/llvm-br:build-base
-            CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain
+            BASE_IMAGE=sssomeshhh/llvm-br:build-base-${{ github.sha }}
+            CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain-${{ github.sha }}
 
   chain-04:
     runs-on: ubuntu-22.04
@@ -291,9 +291,9 @@ jobs:
           target: chain
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-chain
+            sssomeshhh/llvm-br:build-chain-${{ github.sha }}
           build-args: |
-            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup
+            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-${{ github.sha }}
 
   end:
     runs-on: ubuntu-22.04
@@ -317,9 +317,9 @@ jobs:
           target: end
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-end
+            sssomeshhh/llvm-br:build-end-${{ github.sha }}
           build-args: |
-            CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain
+            CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain-${{ github.sha }}
 
   push:
     runs-on: ubuntu-22.04
@@ -352,7 +352,7 @@ jobs:
             ghcr.io/sssomeshhh/llvm-builds:${{ github.sha }}
             ghcr.io/sssomeshhh/llvm-builds:${{ github.ref_name }}
           build-args: |
-            END_IMAGE=sssomeshhh/llvm-br:build-end
+            END_IMAGE=sssomeshhh/llvm-br:build-end-${{ github.sha }}
 
   release:
     runs-on: ubuntu-latest
@@ -387,7 +387,7 @@ jobs:
           tags: |
             pack:bd
           build-args: |
-            END_IMAGE=sssomeshhh/llvm-br:build-end
+            END_IMAGE=sssomeshhh/llvm-br:build-end-${{ github.sha }}
             X=b
             R=/root/llvm
       - name: Copy BD
@@ -421,7 +421,7 @@ jobs:
           tags: |
             pack:id
           build-args: |
-            END_IMAGE=sssomeshhh/llvm-br:build-end
+            END_IMAGE=sssomeshhh/llvm-br:build-end-${{ github.sha }}
             X=i
             R=/root/llvm
       - name: Copy ID
@@ -455,7 +455,7 @@ jobs:
           tags: |
             pack:sd
           build-args: |
-            END_IMAGE=sssomeshhh/llvm-br:build-end
+            END_IMAGE=sssomeshhh/llvm-br:build-end-${{ github.sha }}
             X=s
             R=/root/llvm
       - name: Copy SD
