@@ -4,7 +4,7 @@ FROM ubuntu:jammy as base
 ENV DEBIAN_FRONTEND='noninteractive'
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y \
+    apt-get install -y --no-install-recommends \
         curl git nano \
         gzip lz4 tar xz-utils zlib1g-dev \
         ccache cmake make ninja-build \
