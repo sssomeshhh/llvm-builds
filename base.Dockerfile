@@ -3,7 +3,6 @@ FROM ubuntu:jammy as base
 # install dependencies
 ENV DEBIAN_FRONTEND='noninteractive'
 RUN apt-get update && \
-    apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
         curl git nano \
         gzip lz4 tar xz-utils zlib1g-dev \
