@@ -10,10 +10,10 @@ ARG R
 WORKDIR /root
 
 RUN cd $R && \
-    du -sh $Xd && \
-    tar -cf $Xt $Xd && \
-    rm -rf $Xd && \
-    ls -hls $Xt && \
-    xz -z9 $Xt && \
-    rm -rf $Xt && \
-    ls -hls $Xt.xz
+    du -sh $X"d" && \
+    tar -cf $X"t" $X"d" && \
+    rm -rf $X"d" && \
+    ls -hls $X"t" && \
+    xz -z9 $X"t" && \
+    rm -rf $X"t" && \
+    ls -hls $X"t".xz
