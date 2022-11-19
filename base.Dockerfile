@@ -1,5 +1,10 @@
 FROM ubuntu:jammy as base
 
+# print sysinfo
+RUN uname --all && \
+    lscpu && \
+    free --human
+
 # install dependencies
 ENV DEBIAN_FRONTEND='noninteractive'
 RUN apt-get update && \
