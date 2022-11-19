@@ -6,7 +6,7 @@ FROM base as clean
 
 # setup clang
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+    apt-get install --yes --no-install-recommends \
         clang-14 lld-14 lldb-14 \
         libc++-dev libc++abi-dev && \
     rm -rf /var/lib/apt/lists/*

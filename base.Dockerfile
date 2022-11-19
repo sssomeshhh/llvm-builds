@@ -8,7 +8,7 @@ RUN uname --all && \
 # install dependencies
 ENV DEBIAN_FRONTEND='noninteractive'
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+    apt-get install --yes --no-install-recommends \
         curl git nano \
         gzip lz4 tar xz-utils zlib1g-dev \
         ccache cmake make ninja-build \
