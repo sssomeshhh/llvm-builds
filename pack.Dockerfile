@@ -10,7 +10,6 @@ ARG R
 WORKDIR /root
 
 RUN cd $R && \
-    rm -rf $Xd/.git && \
     du -sh $Xd && \
     tar -cf $Xt $Xd && \
     rm -rf $Xd && \
