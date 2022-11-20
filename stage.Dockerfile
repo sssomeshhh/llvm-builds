@@ -1,12 +1,9 @@
 ARG BASE_IMAGE
 ARG CHAIN_IMAGE
 
-
-FROM $BASE_IMAGE as base
-
 FROM $CHAIN_IMAGE as chain
 
-FROM base as stage
+FROM $BASE_IMAGE as stage
 
 # setup clang
 COPY --from=chain /root/llvm/id/llvm /root/.llvm
