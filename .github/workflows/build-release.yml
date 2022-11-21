@@ -383,6 +383,7 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: pack.Dockerfile
           target: pack
+          load: true
           push: false
           tags: |
             pack:bd
@@ -417,6 +418,7 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: pack.Dockerfile
           target: pack
+          load: true
           push: false
           tags: |
             pack:id
@@ -451,6 +453,7 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: pack.Dockerfile
           target: pack
+          load: true
           push: false
           tags: |
             pack:sd
