@@ -11,5 +11,5 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # copy artifacts
-COPY --from=end /root/llvm/id/llvm /root
+COPY --from=end /root/llvm/id/llvm /root/llvm
 RUN /root/llvm/bin/clang --version
