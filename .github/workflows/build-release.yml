@@ -22,6 +22,11 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: base.Dockerfile
           target: base
+          cache-from: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-base-${{ github.ref_name }}
+          cache-to: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-base-${{ github.ref_name }}
+          load: false
           push: true
           tags: |
             sssomeshhh/llvm-br:build-base-${{ github.sha }}
@@ -48,6 +53,12 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: clean.Dockerfile
           target: clean
+          cache-from: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-base-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+          cache-to: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+          load: false
           push: true
           tags: |
             sssomeshhh/llvm-br:build-setup-${{ github.sha }}
@@ -74,6 +85,12 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: chain.Dockerfile
           target: chain
+          cache-from: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
+          cache-to: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
+          load: false
           push: true
           tags: |
             sssomeshhh/llvm-br:build-chain-${{ github.sha }}
@@ -100,6 +117,13 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: stage.Dockerfile
           target: stage
+          cache-from: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-base-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+          cache-to: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+          load: false
           push: true
           tags: |
             sssomeshhh/llvm-br:build-setup-${{ github.sha }}
@@ -127,6 +151,12 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: chain.Dockerfile
           target: chain
+          cache-from: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
+          cache-to: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
+          load: false
           push: true
           tags: |
             sssomeshhh/llvm-br:build-chain-${{ github.sha }}
@@ -153,6 +183,13 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: stage.Dockerfile
           target: stage
+          cache-from: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-base-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+          cache-to: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+          load: false
           push: true
           tags: |
             sssomeshhh/llvm-br:build-setup-${{ github.sha }}
@@ -180,6 +217,12 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: chain.Dockerfile
           target: chain
+          cache-from: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
+          cache-to: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
+          load: false
           push: true
           tags: |
             sssomeshhh/llvm-br:build-chain-${{ github.sha }}
@@ -206,6 +249,13 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: stage.Dockerfile
           target: stage
+          cache-from: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-base-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+          cache-to: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+          load: false
           push: true
           tags: |
             sssomeshhh/llvm-br:build-setup-${{ github.sha }}
@@ -233,6 +283,12 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: chain.Dockerfile
           target: chain
+          cache-from: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
+          cache-to: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
+          load: false
           push: true
           tags: |
             sssomeshhh/llvm-br:build-chain-${{ github.sha }}
@@ -259,6 +315,13 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: stage.Dockerfile
           target: stage
+          cache-from: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-base-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+          cache-to: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+          load: false
           push: true
           tags: |
             sssomeshhh/llvm-br:build-setup-${{ github.sha }}
@@ -286,6 +349,12 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: chain.Dockerfile
           target: chain
+          cache-from: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
+          cache-to: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
+          load: false
           push: true
           tags: |
             sssomeshhh/llvm-br:build-chain-${{ github.sha }}
@@ -312,6 +381,12 @@ jobs:
           builder: ${{ steps.setup_buildx.name }}
           file: end.Dockerfile
           target: end
+          cache-from: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-end-${{ github.ref_name }}
+          cache-to: |
+            type=registry,ref=sssomeshhh/llvm-br:cache-end-${{ github.ref_name }}
+          load: false
           push: true
           tags: |
             sssomeshhh/llvm-br:build-end-${{ github.sha }}
