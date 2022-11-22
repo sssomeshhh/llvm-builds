@@ -18,7 +18,6 @@ RUN cmake \
     -DCMAKE_CXX_COMPILER=$CXX \
     -DCMAKE_INSTALL_PREFIX=$ID \
   # llvm opt-var
-    -DLLVM_CCACHE_BUILD=ON \
     -DLLVM_ENABLE_LIBCXX=ON \
     -DLLVM_ENABLE_LTO="Thin" \
     -DLLVM_ENABLE_PROJECTS="all" \
