@@ -27,6 +27,7 @@ RUN mkdir llvm && \
     mkdir bd/llvm && \
     mkdir id && \
     mkdir id/llvm && \
-    git clone https://github.com/llvm/llvm-project.git sd && \
-    cd sd && \
-    git checkout llvmorg-$LLVM_VERSION_TAG
+    git clone https://github.com/llvm/llvm-project.git sd \
+        --branch=llvmorg-$LLVM_VERSION_TAG \
+        --depth=1 \
+        --origin=github
