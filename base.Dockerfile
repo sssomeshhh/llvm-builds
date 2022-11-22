@@ -1,4 +1,8 @@
-FROM ubuntu:jammy as base
+FROM ubuntu:jammy AS ubuntu
+
+
+
+FROM ubuntu AS base
 
 # print sysinfo
 RUN uname --all && \

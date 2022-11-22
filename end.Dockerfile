@@ -1,3 +1,6 @@
 ARG CHAIN_IMAGE
+FROM $CHAIN_IMAGE AS chain
 
-FROM $CHAIN_IMAGE as end
+
+
+FROM chain AS end

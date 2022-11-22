@@ -1,6 +1,9 @@
 ARG END_IMAGE
+FROM $END_IMAGE AS end
 
-FROM $END_IMAGE as pack
+
+
+FROM end AS pack
 
 # set args
 ARG X

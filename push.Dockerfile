@@ -1,8 +1,13 @@
 ARG END_IMAGE
+FROM $END_IMAGE AS end
 
-FROM $END_IMAGE as end
 
-FROM ubuntu:jammy as push
+
+FROM ubuntu:jammy AS ubuntu
+
+
+
+FROM ubuntu AS push
 
 # install dependencies
 RUN apt-get update && \

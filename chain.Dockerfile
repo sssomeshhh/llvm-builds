@@ -1,6 +1,9 @@
 ARG SETUP_IMAGE
+FROM $SETUP_IMAGE AS setup
 
-FROM $SETUP_IMAGE as chain
+
+
+FROM setup AS chain
 
 # set args
 ARG BD=/root/llvm/bd/llvm

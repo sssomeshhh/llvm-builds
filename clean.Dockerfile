@@ -1,6 +1,9 @@
 ARG BASE_IMAGE
+FROM $BASE_IMAGE AS base
 
-FROM $BASE_IMAGE as clean
+
+
+FROM base AS clean
 
 # setup clang
 RUN apt-get update && \
