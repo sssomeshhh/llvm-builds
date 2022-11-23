@@ -1,31 +1,17 @@
-ARG SETUP_IMAGE
+ARG BASE_IMAGE
+ARG CHAIN_IMAGE
 
-FROM $SETUP_IMAGE AS setup
+FROM $BASE_IMAGE AS base
 
 
 
-FROM setup AS chain
+FROM $CHAIN_IMAGE AS chain
 
-# set args
-ARG BD=/root/llvm/bd/llvm
-ARG ID=/root/llvm/id/llvm
-ARG SD=/root/llvm/sd/llvm
 
-# build artifacts
-RUN cmake \
-        -S $SD \
-        -B $BD \
-        -G Ninja \
-      # cmake opt-var
-        -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_C_COMPILER=$CC \
-        -DCMAKE_CXX_COMPILER=$CXX \
-        -DCMAKE_INSTALL_PREFIX=$ID \
-      # llvm opt-var
-        -DLLVM_ENABLE_LIBCXX=ON \
-        -DLLVM_ENABLE_PROJECTS="all" \
-        -DLLVM_PARALLEL_COMPILE_JOBS=$(nproc) \
-        -DLLVM_TARGETS_TO_BUILD="all" \
-        -DLLVM_USE_LINKER="lld"
-RUN cmake --build $BD
-RUN cmake --install $BD
+
+FROM base AS stage
+
+# setup clang
+COPY --from=chain /root/llvm/id/llvm /root/.llvm
+ENV CC="/root/.llvm/bin/clang"
+ENV CXX="/root/.llvm/bin/clang++"
