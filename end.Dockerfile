@@ -1,4 +1,5 @@
 ARG CHAIN_IMAGE
+
 FROM $CHAIN_IMAGE AS chain
 
 
