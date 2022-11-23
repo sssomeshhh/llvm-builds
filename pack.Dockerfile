@@ -8,11 +8,9 @@ FROM end AS pack
 
 # set args
 ARG X
-ARG R
+ARG R=/root/llvm
 
 # pack artifacts
-WORKDIR /root
-
 RUN cd $R && \
     du -sh $X"d" && \
     tar -cf $X"t" $X"d" && \
