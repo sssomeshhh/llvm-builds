@@ -1,17 +1,17 @@
 ARG BASE_IMAGE
-ARG CHAIN_IMAGE
+ARG STAGE_IMAGE
 
 FROM $BASE_IMAGE AS base
 
 
 
-FROM $CHAIN_IMAGE AS chain
+FROM $STAGE_IMAGE AS stage
 
 
 
-FROM base AS stage
+FROM base AS chain
 
 # setup clang
-COPY --from=chain /root/llvm/id/llvm /root/.llvm
+COPY --from=stage /root/llvm/id/llvm /root/.llvm
 ENV CC="/root/.llvm/bin/clang"
 ENV CXX="/root/.llvm/bin/clang++"
