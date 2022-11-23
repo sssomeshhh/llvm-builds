@@ -55,13 +55,13 @@ jobs:
           target: clean
           cache-from: |
             type=registry,ref=sssomeshhh/llvm-br:cache-base-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-00-${{ github.ref_name }}
           cache-to: |
-            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-00-${{ github.ref_name }}
           load: false
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-setup-${{ github.sha }}
+            sssomeshhh/llvm-br:build-setup-00-${{ github.sha }}
           build-args: |
             BASE_IMAGE=sssomeshhh/llvm-br:build-base-${{ github.sha }}
 
@@ -86,7 +86,7 @@ jobs:
           file: chain.Dockerfile
           target: chain
           cache-from: |
-            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-00-${{ github.ref_name }}
             type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
           cache-to: |
             type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
@@ -95,7 +95,7 @@ jobs:
           tags: |
             sssomeshhh/llvm-br:build-chain-${{ github.sha }}
           build-args: |
-            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-${{ github.sha }}
+            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-00-${{ github.sha }}
 
   setup-01:
     runs-on: ubuntu-22.04
@@ -120,13 +120,13 @@ jobs:
           cache-from: |
             type=registry,ref=sssomeshhh/llvm-br:cache-base-${{ github.ref_name }}
             type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-01-${{ github.ref_name }}
           cache-to: |
-            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-01-${{ github.ref_name }}
           load: false
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-setup-${{ github.sha }}
+            sssomeshhh/llvm-br:build-setup-01-${{ github.sha }}
           build-args: |
             BASE_IMAGE=sssomeshhh/llvm-br:build-base-${{ github.sha }}
             CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain-${{ github.sha }}
@@ -152,7 +152,7 @@ jobs:
           file: chain.Dockerfile
           target: chain
           cache-from: |
-            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-01-${{ github.ref_name }}
             type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
           cache-to: |
             type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
@@ -161,7 +161,7 @@ jobs:
           tags: |
             sssomeshhh/llvm-br:build-chain-${{ github.sha }}
           build-args: |
-            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-${{ github.sha }}
+            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-01-${{ github.sha }}
 
   setup-02:
     runs-on: ubuntu-22.04
@@ -186,13 +186,13 @@ jobs:
           cache-from: |
             type=registry,ref=sssomeshhh/llvm-br:cache-base-${{ github.ref_name }}
             type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-02-${{ github.ref_name }}
           cache-to: |
-            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-02-${{ github.ref_name }}
           load: false
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-setup-${{ github.sha }}
+            sssomeshhh/llvm-br:build-setup-02-${{ github.sha }}
           build-args: |
             BASE_IMAGE=sssomeshhh/llvm-br:build-base-${{ github.sha }}
             CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain-${{ github.sha }}
@@ -218,7 +218,7 @@ jobs:
           file: chain.Dockerfile
           target: chain
           cache-from: |
-            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-02-${{ github.ref_name }}
             type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
           cache-to: |
             type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
@@ -227,7 +227,7 @@ jobs:
           tags: |
             sssomeshhh/llvm-br:build-chain-${{ github.sha }}
           build-args: |
-            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-${{ github.sha }}
+            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-02-${{ github.sha }}
 
   setup-03:
     runs-on: ubuntu-22.04
@@ -252,13 +252,13 @@ jobs:
           cache-from: |
             type=registry,ref=sssomeshhh/llvm-br:cache-base-${{ github.ref_name }}
             type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-03-${{ github.ref_name }}
           cache-to: |
-            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-03-${{ github.ref_name }}
           load: false
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-setup-${{ github.sha }}
+            sssomeshhh/llvm-br:build-setup-03-${{ github.sha }}
           build-args: |
             BASE_IMAGE=sssomeshhh/llvm-br:build-base-${{ github.sha }}
             CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain-${{ github.sha }}
@@ -284,7 +284,7 @@ jobs:
           file: chain.Dockerfile
           target: chain
           cache-from: |
-            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-03-${{ github.ref_name }}
             type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
           cache-to: |
             type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
@@ -293,7 +293,7 @@ jobs:
           tags: |
             sssomeshhh/llvm-br:build-chain-${{ github.sha }}
           build-args: |
-            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-${{ github.sha }}
+            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-03-${{ github.sha }}
 
   setup-04:
     runs-on: ubuntu-22.04
@@ -318,13 +318,13 @@ jobs:
           cache-from: |
             type=registry,ref=sssomeshhh/llvm-br:cache-base-${{ github.ref_name }}
             type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-04-${{ github.ref_name }}
           cache-to: |
-            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-04-${{ github.ref_name }}
           load: false
           push: true
           tags: |
-            sssomeshhh/llvm-br:build-setup-${{ github.sha }}
+            sssomeshhh/llvm-br:build-setup-04-${{ github.sha }}
           build-args: |
             BASE_IMAGE=sssomeshhh/llvm-br:build-base-${{ github.sha }}
             CHAIN_IMAGE=sssomeshhh/llvm-br:build-chain-${{ github.sha }}
@@ -350,7 +350,7 @@ jobs:
           file: chain.Dockerfile
           target: chain
           cache-from: |
-            type=registry,ref=sssomeshhh/llvm-br:cache-setup-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/llvm-br:cache-setup-04-${{ github.ref_name }}
             type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
           cache-to: |
             type=registry,ref=sssomeshhh/llvm-br:cache-chain-${{ github.ref_name }}
@@ -359,7 +359,7 @@ jobs:
           tags: |
             sssomeshhh/llvm-br:build-chain-${{ github.sha }}
           build-args: |
-            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-${{ github.sha }}
+            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-04-${{ github.sha }}
 
   end:
     runs-on: ubuntu-22.04
