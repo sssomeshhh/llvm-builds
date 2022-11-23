@@ -444,28 +444,14 @@ jobs:
   pack-bd:
     runs-on: ubuntu-22.04
     needs: [release]
+    env:
+      END_IMAGE: sssomeshhh/llvm-br:build-end-${{ github.sha }}
     steps:
-      - name: Setup Buildx
-        id: setup_buildx
-        uses: docker/setup-buildx-action@v2.2.1
-      - name: Load Pack BD
-        id: load_pack_bd
-        uses: docker/build-push-action@v3.2.0
-        with:
-          builder: ${{ steps.setup_buildx.name }}
-          file: pack.Dockerfile
-          target: pack
-          load: true
-          push: false
-          tags: |
-            pack:bd
-          build-args: |
-            END_IMAGE=sssomeshhh/llvm-br:build-end-${{ github.sha }}
-            X=b
-            R=/root/llvm
       - name: Copy BD
         id: copy_bd
         run: |
+          export DOCKER_BUILKIT=1;
+          docker build . --tag=pack:bd --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=b;
           docker run --rm --tty --detach --interactive --name=cntnr-bd pack:bd bash;
           docker cp cntnr-bd:/root/llvm/bt.xz ./;
           docker stop cntnr-bd;
@@ -479,28 +465,14 @@ jobs:
   pack-id:
     runs-on: ubuntu-22.04
     needs: [release]
+    env:
+      END_IMAGE: sssomeshhh/llvm-br:build-end-${{ github.sha }}
     steps:
-      - name: Setup Buildx
-        id: setup_buildx
-        uses: docker/setup-buildx-action@v2.2.1
-      - name: Load Pack ID
-        id: load_pack_id
-        uses: docker/build-push-action@v3.2.0
-        with:
-          builder: ${{ steps.setup_buildx.name }}
-          file: pack.Dockerfile
-          target: pack
-          load: true
-          push: false
-          tags: |
-            pack:id
-          build-args: |
-            END_IMAGE=sssomeshhh/llvm-br:build-end-${{ github.sha }}
-            X=i
-            R=/root/llvm
       - name: Copy ID
         id: copy_id
         run: |
+          export DOCKER_BUILKIT=1;
+          docker build . --tag=pack:id --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=i;
           docker run --rm --tty --detach --interactive --name=cntnr-id pack:id bash;
           docker cp cntnr-id:/root/llvm/it.xz ./;
           docker stop cntnr-id;
@@ -514,28 +486,14 @@ jobs:
   pack-sd:
     runs-on: ubuntu-22.04
     needs: [release]
+    env:
+      END_IMAGE: sssomeshhh/llvm-br:build-end-${{ github.sha }}
     steps:
-      - name: Setup Buildx
-        id: setup_buildx
-        uses: docker/setup-buildx-action@v2.2.1
-      - name: Load Pack SD
-        id: load_pack_sd
-        uses: docker/build-push-action@v3.2.0
-        with:
-          builder: ${{ steps.setup_buildx.name }}
-          file: pack.Dockerfile
-          target: pack
-          load: true
-          push: false
-          tags: |
-            pack:sd
-          build-args: |
-            END_IMAGE=sssomeshhh/llvm-br:build-end-${{ github.sha }}
-            X=s
-            R=/root/llvm
       - name: Copy SD
         id: copy_sd
         run: |
+          export DOCKER_BUILKIT=1;
+          docker build . --tag=pack:sd --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=s;
           docker run --rm --tty --detach --interactive --name=cntnr-sd pack:sd bash;
           docker cp cntnr-sd:/root/llvm/st.xz ./;
           docker stop cntnr-sd;
