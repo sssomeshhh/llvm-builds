@@ -4,7 +4,7 @@ FROM $SETUP_IMAGE AS setup
 
 
 
-FROM setup AS chain
+FROM setup AS stage
 
 # set args
 ARG BD=/root/llvm/bd/llvm
