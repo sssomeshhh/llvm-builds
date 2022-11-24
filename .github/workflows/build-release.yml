@@ -454,7 +454,7 @@ jobs:
         id: copy_bd
         run: |
           export DOCKER_BUILKIT=1;
-          docker build . --tag=pack:bd --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=b;
+          docker build . --file=pack.Dockerfile --tag=pack:bd --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=b;
           docker run --rm --tty --detach --interactive --name=cntnr-bd pack:bd bash;
           docker cp cntnr-bd:/root/llvm/bt.xz ./;
           docker stop cntnr-bd;
@@ -478,7 +478,7 @@ jobs:
         id: copy_id
         run: |
           export DOCKER_BUILKIT=1;
-          docker build . --tag=pack:id --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=i;
+          docker build . --file=pack.Dockerfile --tag=pack:id --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=i;
           docker run --rm --tty --detach --interactive --name=cntnr-id pack:id bash;
           docker cp cntnr-id:/root/llvm/it.xz ./;
           docker stop cntnr-id;
@@ -502,7 +502,7 @@ jobs:
         id: copy_sd
         run: |
           export DOCKER_BUILKIT=1;
-          docker build . --tag=pack:sd --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=s;
+          docker build . --file=pack.Dockerfile --tag=pack:sd --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=s;
           docker run --rm --tty --detach --interactive --name=cntnr-sd pack:sd bash;
           docker cp cntnr-sd:/root/llvm/st.xz ./;
           docker stop cntnr-sd;
