@@ -23,7 +23,7 @@ jobs:
           file: base.Dockerfile
           target: base
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-base-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/cache:llvm-br-base
           cache-to: |
             type=registry,ref=sssomeshhh/cache:llvm-br-base
           load: false
@@ -54,8 +54,8 @@ jobs:
           file: clean.Dockerfile
           target: clean
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-base-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-00-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/cache:llvm-br-base
+            type=registry,ref=sssomeshhh/cache:llvm-br-setup-00
           cache-to: |
             type=registry,ref=sssomeshhh/cache:llvm-br-setup-00
           load: false
@@ -86,8 +86,8 @@ jobs:
           file: stage.Dockerfile
           target: stage
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-00-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-00-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/cache:llvm-br-setup-00
+            type=registry,ref=sssomeshhh/cache:llvm-br-stage-00
           cache-to: |
             type=registry,ref=sssomeshhh/cache:llvm-br-stage-00
           load: false
@@ -118,9 +118,9 @@ jobs:
           file: chain.Dockerfile
           target: chain
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-base-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-00-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-01-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/cache:llvm-br-base
+            type=registry,ref=sssomeshhh/cache:llvm-br-stage-00
+            type=registry,ref=sssomeshhh/cache:llvm-br-setup-01
           cache-to: |
             type=registry,ref=sssomeshhh/cache:llvm-br-setup-01
           load: false
@@ -152,8 +152,8 @@ jobs:
           file: stage.Dockerfile
           target: stage
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-01-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-01-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/cache:llvm-br-setup-01
+            type=registry,ref=sssomeshhh/cache:llvm-br-stage-01
           cache-to: |
             type=registry,ref=sssomeshhh/cache:llvm-br-stage-01
           load: false
@@ -184,9 +184,9 @@ jobs:
           file: chain.Dockerfile
           target: chain
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-base-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-01-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-02-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/cache:llvm-br-base
+            type=registry,ref=sssomeshhh/cache:llvm-br-stage-01
+            type=registry,ref=sssomeshhh/cache:llvm-br-setup-02
           cache-to: |
             type=registry,ref=sssomeshhh/cache:llvm-br-setup-02
           load: false
@@ -218,8 +218,8 @@ jobs:
           file: stage.Dockerfile
           target: stage
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-02-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-02-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/cache:llvm-br-setup-02
+            type=registry,ref=sssomeshhh/cache:llvm-br-stage-02
           cache-to: |
             type=registry,ref=sssomeshhh/cache:llvm-br-stage-02
           load: false
@@ -250,9 +250,9 @@ jobs:
           file: chain.Dockerfile
           target: chain
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-base-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-02-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-03-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/cache:llvm-br-base
+            type=registry,ref=sssomeshhh/cache:llvm-br-stage-02
+            type=registry,ref=sssomeshhh/cache:llvm-br-setup-03
           cache-to: |
             type=registry,ref=sssomeshhh/cache:llvm-br-setup-03
           load: false
@@ -284,8 +284,8 @@ jobs:
           file: stage.Dockerfile
           target: stage
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-03-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-03-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/cache:llvm-br-setup-03
+            type=registry,ref=sssomeshhh/cache:llvm-br-stage-03
           cache-to: |
             type=registry,ref=sssomeshhh/cache:llvm-br-stage-03
           load: false
@@ -316,9 +316,9 @@ jobs:
           file: chain.Dockerfile
           target: chain
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-base-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-03-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-04-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/cache:llvm-br-base
+            type=registry,ref=sssomeshhh/cache:llvm-br-stage-03
+            type=registry,ref=sssomeshhh/cache:llvm-br-setup-04
           cache-to: |
             type=registry,ref=sssomeshhh/cache:llvm-br-setup-04
           load: false
@@ -350,8 +350,8 @@ jobs:
           file: stage.Dockerfile
           target: stage
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-04-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-04-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/cache:llvm-br-setup-04
+            type=registry,ref=sssomeshhh/cache:llvm-br-stage-04
           cache-to: |
             type=registry,ref=sssomeshhh/cache:llvm-br-stage-04
           load: false
@@ -382,8 +382,8 @@ jobs:
           file: end.Dockerfile
           target: end
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-04-${{ github.ref_name }}
-            type=registry,ref=sssomeshhh/cache:llvm-br-end-${{ github.ref_name }}
+            type=registry,ref=sssomeshhh/cache:llvm-br-stage-04
+            type=registry,ref=sssomeshhh/cache:llvm-br-end
           cache-to: |
             type=registry,ref=sssomeshhh/cache:llvm-br-end
           load: false
