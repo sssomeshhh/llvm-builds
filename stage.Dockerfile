@@ -22,6 +22,7 @@ RUN cmake \
         -DCMAKE_CXX_COMPILER=$CXX \
         -DCMAKE_INSTALL_PREFIX=$ID \
       # llvm opt-var
+        -DLLVM_ENABLE_LIBCXX=ON \
         -DLLVM_ENABLE_PROJECTS="all" \
         -DLLVM_PARALLEL_COMPILE_JOBS=$(nproc) \
         -DLLVM_TARGETS_TO_BUILD="all" \
