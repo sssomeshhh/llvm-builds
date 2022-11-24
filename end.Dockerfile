@@ -1,7 +1,7 @@
-ARG CHAIN_IMAGE
+ARG STAGE_IMAGE
 
-FROM $CHAIN_IMAGE AS chain
+FROM $STAGE_IMAGE AS stage
 
 
 
-FROM chain AS end
+FROM stage AS end
