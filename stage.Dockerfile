@@ -25,6 +25,7 @@ RUN cmake \
         -DLLVM_ENABLE_LIBCXX=ON \
         -DLLVM_ENABLE_PROJECTS="all" \
         -DLLVM_PARALLEL_COMPILE_JOBS=$(nproc) \
+        -DLLVM_STATIC_LINK_CXX_STDLIB=ON \
         -DLLVM_TARGETS_TO_BUILD="all" \
         -DLLVM_USE_LINKER="lld"
 RUN cmake --build $BD
