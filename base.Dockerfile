@@ -20,8 +20,8 @@ RUN apt-get update && \
         python3 python3-pip python3-venv && \
     rm -rf /var/lib/apt/lists/*
 
-# set args
-ARG LLVM_VERSION_TAG
+# set llvm version
+ENV LLVM_VERSION=0.0.0
 
 # setup source
 WORKDIR /root
@@ -33,4 +33,4 @@ RUN mkdir llvm && \
     mkdir id/llvm && \
     git clone https://github.com/llvm/llvm-project.git sd && \
     cd sd && \
-    git checkout llvmorg-$LLVM_VERSION_TAG
+    git checkout llvmorg-$LLVM_VERSION

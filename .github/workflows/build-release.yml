@@ -33,8 +33,6 @@ jobs:
           push: true
           tags: |
             sssomeshhh/llvm-br:build-base-${{ github.sha }}
-          build-args: |
-            LLVM_VERSION_TAG=15.0.3
 
   setup-00:
     runs-on: ubuntu-22.04
