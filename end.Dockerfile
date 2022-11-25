@@ -1,7 +1,0 @@
-ARG STAGE_IMAGE
-
-FROM $STAGE_IMAGE AS stage
-
-
-
-FROM stage AS end
