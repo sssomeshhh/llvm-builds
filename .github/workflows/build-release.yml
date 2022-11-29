@@ -20,48 +20,14 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           builder: ${{ steps.setup_buildx.name }}
-          file: base.Dockerfile
+          file: Dockerfile
           target: base
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-base
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-base
           cache-to: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-base
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-base
           load: false
-          push: true
-          tags: |
-            sssomeshhh/llvm-br:build-base-${{ github.sha }}
-
-  setup-00:
-    runs-on: ubuntu-22.04
-    needs: [base]
-    steps:
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2.1.0
-        with:
-          registry: docker.io
-          username: sssomeshhh
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-      - name: Setup Docker Buildx
-        id: setup_buildx
-        uses: docker/setup-buildx-action@v2.2.1
-      - name: Build Load Clean
-        id: build_load_clean
-        uses: docker/build-push-action@v3.2.0
-        with:
-          builder: ${{ steps.setup_buildx.name }}
-          file: clean.Dockerfile
-          target: clean
-          cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-base
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-00
-          cache-to: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-00
-          load: false
-          push: true
-          tags: |
-            sssomeshhh/llvm-br:build-setup-00-${{ github.sha }}
-          build-args: |
-            BASE_IMAGE=sssomeshhh/llvm-br:build-base-${{ github.sha }}
+          push: false
 
   stage-00:
     runs-on: ubuntu-22.04
@@ -81,53 +47,15 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           builder: ${{ steps.setup_buildx.name }}
-          file: stage.Dockerfile
+          file: Dockerfile
           target: stage
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-00
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-00
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-setup-00
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-stage-00
           cache-to: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-00
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-stage-00
           load: false
-          push: true
-          tags: |
-            sssomeshhh/llvm-br:build-stage-00-${{ github.sha }}
-          build-args: |
-            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-00-${{ github.sha }}
-
-  setup-01:
-    runs-on: ubuntu-22.04
-    needs: [stage-00]
-    steps:
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2.1.0
-        with:
-          registry: docker.io
-          username: sssomeshhh
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-      - name: Setup Docker Buildx
-        id: setup_buildx
-        uses: docker/setup-buildx-action@v2.2.1
-      - name: Build Load Stage
-        id: build_load_stage
-        uses: docker/build-push-action@v3.2.0
-        with:
-          builder: ${{ steps.setup_buildx.name }}
-          file: chain.Dockerfile
-          target: chain
-          cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-base
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-00
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-01
-          cache-to: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-01
-          load: false
-          push: true
-          tags: |
-            sssomeshhh/llvm-br:build-setup-01-${{ github.sha }}
-          build-args: |
-            BASE_IMAGE=sssomeshhh/llvm-br:build-base-${{ github.sha }}
-            STAGE_IMAGE=sssomeshhh/llvm-br:build-stage-00-${{ github.sha }}
+          push: false
 
   stage-01:
     runs-on: ubuntu-22.04
@@ -147,53 +75,15 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           builder: ${{ steps.setup_buildx.name }}
-          file: stage.Dockerfile
+          file: Dockerfile
           target: stage
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-01
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-01
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-setup-01
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-stage-01
           cache-to: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-01
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-stage-01
           load: false
-          push: true
-          tags: |
-            sssomeshhh/llvm-br:build-stage-01-${{ github.sha }}
-          build-args: |
-            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-01-${{ github.sha }}
-
-  setup-02:
-    runs-on: ubuntu-22.04
-    needs: [stage-01]
-    steps:
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2.1.0
-        with:
-          registry: docker.io
-          username: sssomeshhh
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-      - name: Setup Docker Buildx
-        id: setup_buildx
-        uses: docker/setup-buildx-action@v2.2.1
-      - name: Build Load Stage
-        id: build_load_stage
-        uses: docker/build-push-action@v3.2.0
-        with:
-          builder: ${{ steps.setup_buildx.name }}
-          file: chain.Dockerfile
-          target: chain
-          cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-base
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-01
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-02
-          cache-to: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-02
-          load: false
-          push: true
-          tags: |
-            sssomeshhh/llvm-br:build-setup-02-${{ github.sha }}
-          build-args: |
-            BASE_IMAGE=sssomeshhh/llvm-br:build-base-${{ github.sha }}
-            STAGE_IMAGE=sssomeshhh/llvm-br:build-stage-01-${{ github.sha }}
+          push: false
 
   stage-02:
     runs-on: ubuntu-22.04
@@ -213,53 +103,15 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           builder: ${{ steps.setup_buildx.name }}
-          file: stage.Dockerfile
+          file: Dockerfile
           target: stage
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-02
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-02
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-setup-02
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-stage-02
           cache-to: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-02
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-stage-02
           load: false
-          push: true
-          tags: |
-            sssomeshhh/llvm-br:build-stage-02-${{ github.sha }}
-          build-args: |
-            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-02-${{ github.sha }}
-
-  setup-03:
-    runs-on: ubuntu-22.04
-    needs: [stage-02]
-    steps:
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2.1.0
-        with:
-          registry: docker.io
-          username: sssomeshhh
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-      - name: Setup Docker Buildx
-        id: setup_buildx
-        uses: docker/setup-buildx-action@v2.2.1
-      - name: Build Load Stage
-        id: build_load_stage
-        uses: docker/build-push-action@v3.2.0
-        with:
-          builder: ${{ steps.setup_buildx.name }}
-          file: chain.Dockerfile
-          target: chain
-          cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-base
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-02
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-03
-          cache-to: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-03
-          load: false
-          push: true
-          tags: |
-            sssomeshhh/llvm-br:build-setup-03-${{ github.sha }}
-          build-args: |
-            BASE_IMAGE=sssomeshhh/llvm-br:build-base-${{ github.sha }}
-            STAGE_IMAGE=sssomeshhh/llvm-br:build-stage-02-${{ github.sha }}
+          push: false
 
   stage-03:
     runs-on: ubuntu-22.04
@@ -279,53 +131,15 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           builder: ${{ steps.setup_buildx.name }}
-          file: stage.Dockerfile
+          file: Dockerfile
           target: stage
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-03
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-03
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-setup-03
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-stage-03
           cache-to: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-03
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-stage-03
           load: false
-          push: true
-          tags: |
-            sssomeshhh/llvm-br:build-stage-03-${{ github.sha }}
-          build-args: |
-            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-03-${{ github.sha }}
-
-  setup-04:
-    runs-on: ubuntu-22.04
-    needs: [stage-03]
-    steps:
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2.1.0
-        with:
-          registry: docker.io
-          username: sssomeshhh
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-      - name: Setup Docker Buildx
-        id: setup_buildx
-        uses: docker/setup-buildx-action@v2.2.1
-      - name: Build Load Stage
-        id: build_load_stage
-        uses: docker/build-push-action@v3.2.0
-        with:
-          builder: ${{ steps.setup_buildx.name }}
-          file: chain.Dockerfile
-          target: chain
-          cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-base
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-03
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-04
-          cache-to: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-04
-          load: false
-          push: true
-          tags: |
-            sssomeshhh/llvm-br:build-setup-04-${{ github.sha }}
-          build-args: |
-            BASE_IMAGE=sssomeshhh/llvm-br:build-base-${{ github.sha }}
-            STAGE_IMAGE=sssomeshhh/llvm-br:build-stage-03-${{ github.sha }}
+          push: false
 
   stage-04:
     runs-on: ubuntu-22.04
@@ -345,19 +159,15 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           builder: ${{ steps.setup_buildx.name }}
-          file: stage.Dockerfile
+          file: Dockerfile
           target: stage
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-setup-04
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-04
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-setup-04
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-stage-04
           cache-to: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-04
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-stage-04
           load: false
-          push: true
-          tags: |
-            sssomeshhh/llvm-br:build-stage-04-${{ github.sha }}
-          build-args: |
-            SETUP_IMAGE=sssomeshhh/llvm-br:build-setup-04-${{ github.sha }}
+          push: false
 
   end:
     runs-on: ubuntu-22.04
@@ -377,13 +187,13 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           builder: ${{ steps.setup_buildx.name }}
-          file: end.Dockerfile
+          file: Dockerfile
           target: end
           cache-from: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-stage-04
-            type=registry,ref=sssomeshhh/cache:llvm-br-end
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-stage-04
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-end
           cache-to: |
-            type=registry,ref=sssomeshhh/cache:llvm-br-end
+            type=registry,ref=sssomeshhh/cache:llvm-br-rf-end
           load: false
           push: true
           tags: |
@@ -415,7 +225,7 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           builder: ${{ steps.setup_buildx.name }}
-          file: push.Dockerfile
+          file: Dockerfile
           target: push
           push: true
           tags: |
@@ -452,7 +262,7 @@ jobs:
         id: copy_bd
         run: |
           export DOCKER_BUILKIT=1;
-          docker build . --file=pack.Dockerfile --tag=pack:bd --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=b;
+          docker build . --tag=pack:bd --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=b;
           docker run --rm --tty --detach --interactive --name=cntnr-bd pack:bd bash;
           docker cp cntnr-bd:/root/llvm/bt.xz ./;
           docker stop cntnr-bd;
@@ -476,7 +286,7 @@ jobs:
         id: copy_id
         run: |
           export DOCKER_BUILKIT=1;
-          docker build . --file=pack.Dockerfile --tag=pack:id --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=i;
+          docker build . --tag=pack:id --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=i;
           docker run --rm --tty --detach --interactive --name=cntnr-id pack:id bash;
           docker cp cntnr-id:/root/llvm/it.xz ./;
           docker stop cntnr-id;
@@ -500,7 +310,7 @@ jobs:
         id: copy_sd
         run: |
           export DOCKER_BUILKIT=1;
-          docker build . --file=pack.Dockerfile --tag=pack:sd --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=s;
+          docker build . --tag=pack:sd --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=s;
           docker run --rm --tty --detach --interactive --name=cntnr-sd pack:sd bash;
           docker cp cntnr-sd:/root/llvm/st.xz ./;
           docker stop cntnr-sd;
