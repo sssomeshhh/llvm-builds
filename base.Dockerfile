@@ -21,7 +21,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # set llvm version
-ENV LLVM_VERSION=15.0.5
+ENV LLVM_VERSION=15.0.6
 
 # setup source
 WORKDIR /root
