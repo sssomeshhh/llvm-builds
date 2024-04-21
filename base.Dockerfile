@@ -31,6 +31,6 @@ RUN mkdir llvm && \
     mkdir bd/llvm && \
     mkdir id && \
     mkdir id/llvm && \
-    git clone https://github.com/llvm/llvm-project.git sd && \
-    cd sd && \
-    git checkout llvmorg-$LLVM_VERSION
+    curl -O https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-$LLVM_VERSION.tar.gz && \
+    tar -xzf llvmorg-$LLVM_VERSION.tar.gz && \
+    mv llvmorg-$LLVM_VERSION sd -v
