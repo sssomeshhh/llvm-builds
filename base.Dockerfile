@@ -34,4 +34,4 @@ RUN mkdir llvm && \
     curl -LO "https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-$LLVM_VERSION.tar.gz" && \
     tar -xzf llvmorg-$LLVM_VERSION.tar.gz && \
     rm -rf llvmorg-$LLVM_VERSION.tar.gz && \
-    mv llvmorg-$LLVM_VERSION sd -v
+    mv llvm-project-llvmorg-$LLVM_VERSION sd -v
