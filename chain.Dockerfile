@@ -2,12 +2,7 @@ ARG BASE_IMAGE
 ARG STAGE_IMAGE
 
 FROM $BASE_IMAGE AS base
-
-
-
 FROM $STAGE_IMAGE AS stage
-
-
 
 FROM base AS chain
 

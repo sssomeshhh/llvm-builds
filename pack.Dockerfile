@@ -2,8 +2,6 @@ ARG END_IMAGE
 
 FROM $END_IMAGE AS end
 
-
-
 FROM end AS pack
 
 # set args

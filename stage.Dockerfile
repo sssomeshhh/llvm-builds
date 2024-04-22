@@ -2,8 +2,6 @@ ARG SETUP_IMAGE
 
 FROM $SETUP_IMAGE AS setup
 
-
-
 FROM setup AS stage
 
 # set args
