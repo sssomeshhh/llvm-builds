@@ -4,7 +4,12 @@ FROM $SETUP_IMAGE AS setup
 
 FROM setup AS stage
 
-# set args
+# set llvm args
+ARG LLVM_PROJECTS="all"
+ARG LLVM_RUNTIMES="all"
+ARG LLVM_TARGETS_TO_BUILD="all"
+
+# set dir args
 ARG BD=/root/llvm/bd/llvm
 ARG ID=/root/llvm/id/llvm
 ARG SD=/root/llvm/sd/llvm
@@ -20,9 +25,9 @@ RUN cmake \
         -DCMAKE_CXX_COMPILER=$CXX \
         -DCMAKE_INSTALL_PREFIX=$ID \
       # llvm opt-var
-        -DLLVM_ENABLE_PROJECTS="all" \
-        -DLLVM_ENABLE_RUNTIMES="all" \
-        -DLLVM_TARGETS_TO_BUILD="all" \
+        -DLLVM_ENABLE_PROJECTS=$LLVM_PROJECTS \
+        -DLLVM_ENABLE_RUNTIMES=$LLVM_RUNTIMES \
+        -DLLVM_TARGETS_TO_BUILD=$LLVM_TARGETS_TO_BUILD \
         -DLLVM_USE_LINKER="lld" \
         -DLLVM_PARALLEL_COMPILE_JOBS=$(nproc)
 RUN cmake --build $BD
