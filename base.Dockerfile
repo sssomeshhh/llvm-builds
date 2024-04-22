@@ -6,7 +6,7 @@ FROM ubuntu AS base
 ENV DEBIAN_FRONTEND='noninteractive'
 RUN apt-get update && \
     apt-get install --yes --no-install-recommends \
-        curl gzip lz4 tar xz-utils \
+        curl git gzip lz4 tar xz-utils \
         binutils ccache cmake make ninja-build \
         libedit-dev libstdc++-12-dev zlib1g-dev \
         python3 python3-pip python3-venv && \
