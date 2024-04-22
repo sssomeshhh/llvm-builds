@@ -27,4 +27,5 @@ RUN cmake \
         -DLLVM_TARGETS_TO_BUILD="all" \
         -DLLVM_USE_LINKER="lld"
 RUN cmake --build $BD
+RUN rm -rf sd
 RUN cmake --install $BD
