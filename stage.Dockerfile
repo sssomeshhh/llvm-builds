@@ -21,9 +21,9 @@ RUN cmake \
         -DCMAKE_INSTALL_PREFIX=$ID \
       # llvm opt-var
         -DLLVM_ENABLE_PROJECTS="all" \
-        -DLLVM_PARALLEL_COMPILE_JOBS=$(nproc) \
+        -DLLVM_ENABLE_RUNTIMES="all" \
         -DLLVM_TARGETS_TO_BUILD="all" \
-        -DLLVM_USE_LINKER="lld"
+        -DLLVM_USE_LINKER="lld" \
+        -DLLVM_PARALLEL_COMPILE_JOBS=$(nproc)
 RUN cmake --build $BD
-RUN rm -rf sd
 RUN cmake --install $BD
