@@ -7,7 +7,7 @@ FROM setup AS stage
 # set llvm args
 ARG LLVM_PROJECTS="all"
 ARG LLVM_RUNTIMES="all"
-ARG LLVM_TARGETS_TO_BUILD="X86"
+ARG LLVM_TARGETS_TO_BUILD="all"
 
 # set dir args
 ARG BD=/root/llvm/bd/llvm
