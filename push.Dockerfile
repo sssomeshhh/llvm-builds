@@ -9,7 +9,7 @@ FROM ubuntu AS push
 # install dependencies
 RUN apt-get update && \
     apt-get install --yes --no-install-recommends \
-        binutils libstdc++-12-dev && \
+        binutils libstdc++-14-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # copy artifacts
