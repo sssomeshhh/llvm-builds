@@ -2,7 +2,7 @@ ARG END_IMAGE
 
 FROM $END_IMAGE AS end
 
-FROM ubuntu:jammy AS ubuntu
+FROM ubuntu:24.04 AS ubuntu
 
 FROM ubuntu AS push
 

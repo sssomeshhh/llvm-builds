@@ -1,4 +1,4 @@
-FROM ubuntu:jammy AS ubuntu
+FROM ubuntu:24.04 AS ubuntu
 
 FROM ubuntu AS base
 
