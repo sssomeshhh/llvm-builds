@@ -442,7 +442,7 @@ jobs:
           draft: false
           prerelease: false
 
-  pack-id:
+  pack:
     runs-on: ubuntu-22.04
     needs: [release]
     env:
@@ -451,14 +451,14 @@ jobs:
       - name: Checkout Repo
         id: checkout_repo
         uses: actions/checkout@v3
-      - name: Copy ID
-        id: copy_id
+      - name: Copy Dist
+        id: copy_dist
         run: |
           export DOCKER_BUILKIT=1;
-          docker build . --file=pack.Dockerfile --tag=pack:id --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=i;
-          docker run --rm --tty --detach --interactive --name=cntnr-id pack:id bash;
-          docker cp cntnr-id:/root/llvm/it.xz ./;
-          docker stop cntnr-id;
+          docker build . --file=pack.Dockerfile --tag=pack --target=pack --build-arg END_IMAGE=$END_IMAGE;
+          docker run --rm --tty --detach --interactive --name=cntnr pack bash;
+          docker cp cntnr:/root/llvm/it.xz ./;
+          docker stop cntnr;
       - name: Upload
         id: upload
         uses: softprops/action-gh-release@v1

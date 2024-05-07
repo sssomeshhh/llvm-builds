@@ -9,10 +9,10 @@ ARG X
 
 # pack artifacts
 RUN cd /root/llvm && \
-    du -sh $X"d" && \
-    tar -cf $X"t" $X"d" && \
-    rm -rf $X"d" && \
-    ls -hls $X"t" && \
-    xz -z9 $X"t" && \
-    rm -rf $X"t" && \
-    ls -hls $X"t".xz
+    du -sh id && \
+    tar -cf it id && \
+    rm -rf id && \
+    ls -hls it && \
+    xz -z9 it && \
+    rm -rf it && \
+    ls -hls it.xz
