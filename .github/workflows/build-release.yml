@@ -442,30 +442,6 @@ jobs:
           draft: false
           prerelease: false
 
-  pack-bd:
-    runs-on: ubuntu-22.04
-    needs: [release]
-    env:
-      END_IMAGE: sssomeshhh/llvm-br:build-end-${{ github.sha }}
-    steps:
-      - name: Checkout Repo
-        id: checkout_repo
-        uses: actions/checkout@v3
-      - name: Copy BD
-        id: copy_bd
-        run: |
-          export DOCKER_BUILKIT=1;
-          docker build . --file=pack.Dockerfile --tag=pack:bd --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=b;
-          docker run --rm --tty --detach --interactive --name=cntnr-bd pack:bd bash;
-          docker cp cntnr-bd:/root/llvm/bt.xz ./;
-          docker stop cntnr-bd;
-      - name: Upload
-        id: upload
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            bt.xz
-
   pack-id:
     runs-on: ubuntu-22.04
     needs: [release]
@@ -489,27 +465,3 @@ jobs:
         with:
           files: |
             it.xz
-
-  pack-sd:
-    runs-on: ubuntu-22.04
-    needs: [release]
-    env:
-      END_IMAGE: sssomeshhh/llvm-br:build-end-${{ github.sha }}
-    steps:
-      - name: Checkout Repo
-        id: checkout_repo
-        uses: actions/checkout@v3
-      - name: Copy SD
-        id: copy_sd
-        run: |
-          export DOCKER_BUILKIT=1;
-          docker build . --file=pack.Dockerfile --tag=pack:sd --target=pack --build-arg END_IMAGE=$END_IMAGE --build-arg X=s;
-          docker run --rm --tty --detach --interactive --name=cntnr-sd pack:sd bash;
-          docker cp cntnr-sd:/root/llvm/st.xz ./;
-          docker stop cntnr-sd;
-      - name: Upload
-        id: upload
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            st.xz
