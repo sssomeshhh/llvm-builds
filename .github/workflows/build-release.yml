@@ -68,14 +68,14 @@ jobs:
 
   stage-00:
     needs: [setup-00]
-    uses: ./.github/workflows/sub/stage.yml
+    uses: ./.github/workflows/stage.yml
     with:
       stage_this: 00
     secrets: inherit
 
   setup-01:
     needs: [stage-00]
-    uses: ./.github/workflows/sub/setup.yml
+    uses: ./.github/workflows/setup.yml
     with:
       stage_previous: 00
       stage_this: 01
@@ -83,14 +83,14 @@ jobs:
 
   stage-01:
     needs: [setup-01]
-    uses: ./.github/workflows/sub/stage.yml
+    uses: ./.github/workflows/stage.yml
     with:
       stage_this: 01
     secrets: inherit
 
   setup-02:
     needs: [stage-01]
-    uses: ./.github/workflows/sub/setup.yml
+    uses: ./.github/workflows/setup.yml
     with:
       stage_previous: 01
       stage_this: 02
@@ -98,14 +98,14 @@ jobs:
 
   stage-02:
     needs: [setup-02]
-    uses: ./.github/workflows/sub/stage.yml
+    uses: ./.github/workflows/stage.yml
     with:
       stage_this: 02
     secrets: inherit
 
   setup-03:
     needs: [stage-02]
-    uses: ./.github/workflows/sub/setup.yml
+    uses: ./.github/workflows/setup.yml
     with:
       stage_previous: 02
       stage_this: 03
@@ -113,14 +113,14 @@ jobs:
 
   stage-03:
     needs: [setup-03]
-    uses: ./.github/workflows/sub/stage.yml
+    uses: ./.github/workflows/stage.yml
     with:
       stage_this: 03
     secrets: inherit
 
   setup-04:
     needs: [stage-03]
-    uses: ./.github/workflows/sub/setup.yml
+    uses: ./.github/workflows/setup.yml
     with:
       stage_previous: 03
       stage_this: 04
@@ -128,7 +128,7 @@ jobs:
 
   stage-04:
     needs: [setup-04]
-    uses: ./.github/workflows/sub/stage.yml
+    uses: ./.github/workflows/stage.yml
     with:
       stage_this: 04
     secrets: inherit
