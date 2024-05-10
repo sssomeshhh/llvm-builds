@@ -5,7 +5,7 @@ FROM $SETUP_IMAGE AS setup
 FROM setup AS stage
 
 # set llvm args
-ARG LLVM_PROJECTS="clang;lld;lldb"
+ARG LLVM_PROJECTS="clang;compiler-rt;lld;lldb"
 ARG LLVM_RUNTIMES="libcxx;libcxxabi;libunwind"
 ARG LLVM_TARGETS_TO_BUILD="X86"
 
