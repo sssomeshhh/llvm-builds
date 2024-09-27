@@ -13,7 +13,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # set llvm version
-ENV LLVM_VERSION=18.1.7
+ENV LLVM_VERSION=19.1.0
 
 # setup source
 WORKDIR /root
